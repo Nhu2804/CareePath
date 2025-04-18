@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Trang chủ - CareerPath{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <!-- Optional: Add a subtle pattern overlay instead of just darken if desired -->
+    <div class="hero-overlay-pattern"></div>
+    <div class="hero-darken"></div>
+    <div class="container hero-content"> <!-- Use container -->
+        <h1>ĐI <span class="highlight-yellow">ĐÚNG</span> ĐƯỜNG<br>TƯƠNG LAI TỎA SÁNG</h1>
+        <p class="lead">“Bạn đang băn khoăn về ngành học, định hướng nghề nghiệp hay tự hỏi mình phù hợp với ngành nào? Hãy để CareerPath đồng hành cùng bạn! Khám phá bản thân, tìm hiểu xu hướng và xây dựng lộ trình sự nghiệp vững chắc.”</p>
+        <a href="#info" class="btn btn-lg btn-primary hero-cta"> Bắt đầu khám phá <i class="fas fa-arrow-down ms-2"></i></a> 
+    </div>
+</section>
+
+<section id="info" class="info-section section-padding"> <!-- Added common padding class -->
+    <div class="container">
+        <div class="row align-items-center g-5"> <!-- Bootstrap row with gap -->
+            <div class="col-lg-5 info-left">
+                 <div class="image-wrapper shadow-lg"> <!-- Wrapper for shadow -->
+                    <img src="{% static 'images/test.jpg' %}" alt="Làm bài trắc nghiệm trực tuyến" class="img-fluid rounded"> <!-- img-fluid and rounded -->
+                 </div>
+            </div>
+            <div class="col-lg-6 info-right ms-lg-5">
+                <h2 class="section-title"><span class="highlight-green">HIỂU BẢN THÂN</span>,<br> CHỌN ĐÚNG NGHỀ</h2>
+                <p class="section-subtitle">Khám phá bản thân qua các bài kiểm tra tính cách và sở thích. Nhận ngay kết quả phân tích chi tiết, giúp bạn hiểu rõ điểm mạnh, điểm yếu và định hướng nghề nghiệp phù hợp nhất.</p>
+                <a href="#" class="btn btn-secondary cta-button">Làm bài Test ngay! <i class="fas fa-pen-alt ms-2"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="trends-section section-padding bg-light-gray">
+    <div class="container">
+        <div class="row align-items-center justify-content-between gy-5"> <!-- Use row and align items -->
+
+            <!-- Text Column -->
+            <div class="col-lg-6 text-center text-lg-start"> <!-- Text aligned left on large screens -->
+                <h2 class="section-title mb-3">BẮT KỊP <span class="highlight-yellow">XU HƯỚNG</span>,<br> ĐÓN ĐẦU CƠ HỘI</h2>
+                <p class="section-subtitle mb-4">Cập nhật thông tin mới nhất về thị trường lao động, mức lương các ngành nghề và nhu cầu nhân lực tương lai để đưa ra quyết định sáng suốt.</p>
+                <a href="#" class="btn btn-primary trends-button">Tìm hiểu thêm <i class="fas fa-chart-line ms-2"></i></a>
+            </div>
+
+            <!-- Image Column -->
+            <div class="col-lg-5"> <!-- Slightly smaller column for image can look nice -->
+                 <div class="trends-image-container">
+                    <img src="{% static 'images/trend.jpg' %}" alt="Phân tích xu hướng nghề nghiệp" class="img-fluid rounded shadow-lg"> <!-- Added shadow-lg for more emphasis -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

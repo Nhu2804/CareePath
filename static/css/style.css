@@ -1,0 +1,676 @@
+/* --- Global Styles & Variables --- */
+:root {
+    --primary-green: #28a745; /* Brighter, more positive green */
+    --dark-green: #1e7e34;
+    --light-green: #eaf6ec;
+    --primary-yellow: #ffc107; /* Keep yellow accent */
+    --dark-yellow: #e0a800;
+    --text-dark: #212529;
+    --text-medium: #495057;
+    --text-light: #f8f9fa;
+    --bg-light-gray: #f8f9fa;
+    --border-color: #dee2e6;
+    --font-primary: 'Be Vietnam Pro', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+    --box-shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075);
+    --box-shadow-md: 0 .5rem 1rem rgba(0,0,0,.1);
+    --box-shadow-lg: 0 1rem 3rem rgba(0,0,0,.12);
+    --border-radius-sm: 0.25rem;
+    --border-radius-md: 0.5rem;
+    --border-radius-lg: 0.8rem;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-secondary); /* Use Lato for body text */
+    color: var(--text-medium);
+    background-color: #fff;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary); /* Use Poppins for headings */
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.75em; /* Consistent heading margin */
+}
+
+h2.section-title {
+    font-size: 2.5rem; /* Larger section titles */
+    font-weight: 800; /* Bolder */
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+p.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    margin-bottom: 30px;
+    line-height: 1.7;
+}
+
+a {
+    color: var(--primary-green);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--dark-green);
+    text-decoration: none; /* Often looks cleaner */
+}
+
+.highlight-green {
+    color: var(--primary-green);
+}
+.highlight-yellow {
+    color: var(--primary-yellow);
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-light-gray {
+    background-color: var(--bg-light-gray);
+}
+
+.container {
+    max-width: 1140px; /* Standard container width */
+}
+
+/* --- Bootstrap Button Overrides --- */
+.btn {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    padding: 12px 30px;
+    border-radius: 50px; /* Pill shape */
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 14px;
+    box-shadow: var(--box-shadow-sm);
+    border: none; /* Remove default border */
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-green);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-md);
+}
+
+.btn-secondary {
+    background-color: var(--primary-yellow);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-yellow);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-md);
+}
+
+.btn-lg {
+     padding: 15px 40px;
+     font-size: 16px;
+}
+
+
+/* --- Header Styling --- */
+
+html {
+    scroll-behavior: smooth;
+  }
+  
+
+.logo {
+    line-height: 1.2; /* Tighter line height */
+}
+
+.logo-text {
+    font-size: 32px;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -1.2px;
+}
+
+.brand-main {
+    color: #1E293B; /* Deep slate */
+}
+
+.brand-highlight {
+    color: #22C55E; /* Tailwind's green-500 */
+    margin-left: 2px;
+}
+
+.slogan {
+    font-size: 14px;
+    font-weight: 500;
+    color: #6B7280; /* Gray-500 */
+    margin-top: 4px;
+    font-style: italic;
+    font-family: 'Quicksand', sans-serif;
+}
+.logo-text, .slogan {
+    transition: all 0.3s ease-in-out;
+}
+
+.logo-link:hover .brand-highlight {
+    color: #10B981; 
+}
+
+.logo-link:hover .slogan {
+    transform: translateY(-2px);
+}
+
+
+/* Nav Links */
+
+.navbar-custom {
+    background-color: #ffffff;
+    padding: 10px 0; /* Slightly reduced padding */
+    box-shadow: 0 2px 10px rgba(0,0,0,.08); /* Softer shadow */
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color); /* Subtle bottom border */
+}
+
+/* Center Nav Links */
+.nav-center {
+    gap: 25px; /* Slightly reduced gap */
+    display: flex; /* Ensure flex is explicitly set */
+    align-items: center; /* Align items vertically */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-medium);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 12px 15px; /* Adjusted padding */
+    border-radius: var(--border-radius-md); /* Slightly larger radius */
+    transition: all 0.25s ease-in-out; /* Smooth transition */
+    position: relative; /* Needed for pseudo-elements */
+    display: flex; /* Align icon if present */
+    align-items: center; /* Align icon if present */
+}
+
+.nav-link:hover,
+.nav-link.active { /* Style for active page & hover */
+    color: var(--primary-green);
+    background-color: var(--light-green);
+}
+
+/* Underline effect */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 6px; /* Position slightly above bottom */
+    left: 15px;  /* Match padding */
+    right: 15px; /* Match padding */
+    height: 2px;
+    background-color: var(--primary-green);
+    transform: scaleX(0);
+    transform-origin: center; /* Animate from center */
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother ease */
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    transform: scaleX(1); /* Full width underline on hover/active */
+}
+
+
+
+/* --- Enhanced Dropdown Styling & Hover Effect --- */
+
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: block; /* Keep it block for transitions */
+    position: absolute;
+    min-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    top: 100%; /* Position below the toggle */
+    left: 0;
+    z-index: 1000;
+    padding: 10px 0; /* Vertical padding */
+    margin: 5px 0 0 0 !important; /* Small gap from toggle, !important might be needed */
+    font-size: 15px;
+    color: var(--text-medium);
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.08); /* Softer border */
+    border-radius: var(--border-radius-md); /* Consistent radius */
+    box-shadow: 0 8px 25px rgba(0,0,0,.12); /* Enhanced shadow */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); /* Start slightly lower */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    pointer-events: none; /* Prevent interaction when hidden */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover > .dropdown-menu,
+.dropdown:focus-within > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dropdown-item {
+    display: flex; /* Use flex for icon alignment */
+    align-items: center; /* Vertically align icon and text */
+    width: 100%;
+    padding: 12px 20px; /* Consistent padding */
+    clear: both;
+    font-weight: 500; /* Slightly bolder */
+    color: var(--text-medium);
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+}
+
+.dropdown-item i.fa-fw { /* Style for fixed-width icons */
+     color: var(--primary-green); /* Make icon color stand out */
+     opacity: 0.7;
+     transition: opacity 0.25s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    color: var(--primary-green); /* Text color on hover */
+    background-color: var(--light-green); /* Background color on hover */
+    text-decoration: none;
+}
+
+.dropdown-item:hover i.fa-fw,
+.dropdown-item:focus i.fa-fw {
+    opacity: 1; /* Make icon fully visible on hover */
+}
+
+/* Optional: Divider style if you use it */
+.dropdown-divider {
+    height: 1px;
+    margin: 8px 0;
+    overflow: hidden;
+    background-color: var(--border-color);
+}
+
+/* Add a small invisible padding to avoid flicker */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: transparent;
+}
+
+/* Login Button in Header */
+.btn-login {
+    padding: 10px 25px; /* Slightly smaller padding */
+    font-size: 14px;
+    /* Uses general btn-primary styles */
+}
+
+/* Mobile Menu Toggle */
+.navbar-toggler {
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+}
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Mobile Menu Collapse Area */
+#mobileNav {
+    background-color: #fff;
+    border-top: 1px solid var(--border-color);
+}
+#mobileNav .nav-link {
+    padding: 12px 0; /* Adjust padding */
+    display: block;
+}
+#mobileNav .dropdown-menu {
+    box-shadow: none;
+    margin-top: 0 !important;
+    border-radius: 0;
+}
+
+
+/* --- Hero Section --- */
+.hero {
+    position: relative;
+    height: 600px; /* Taller hero */
+    background-image: url('../images/home.jpg'); /* Ensure path is correct */
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content */
+    text-align: center; /* Center text */
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+.hero-darken {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 30, 20, 0.6); /* Darker green-tinted overlay */
+    z-index: 1;
+}
+
+
+
+.hero-content {
+    position: relative;
+    z-index: 3; /* Above overlays */
+    padding: 20px;
+    animation: fadeInDown 1s ease-out; /* Add animation */
+}
+
+.hero h1 {
+    font-size: 3.5rem; /* Larger heading */
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    color: #fff; /* Ensure white */
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.hero p.lead {
+    font-size: 1.2rem; /* Slightly larger lead text */
+    line-height: 1.7;
+    max-width: 700px;
+    margin: 0 auto 30px auto; /* Center horizontally */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+}
+
+.hero .hero-cta {
+    /* Uses btn, btn-lg, btn-primary styles */
+    animation: fadeInUp 1s ease-out 0.5s; /* Delayed animation */
+    animation-fill-mode: both; /* Keep state after animation */
+}
+
+/* --- Info Section --- */
+.info-section {
+    background-color: #fff; /* Changed from green */
+    /* Uses section-padding */
+}
+
+.info-left .image-wrapper {
+    position: relative; /* For potential decorative elements */
+    border-radius: var(--border-radius-lg); /* Match image rounding */
+}
+
+.info-left img {
+    border-radius: var(--border-radius-lg);
+    object-fit: cover;
+    /* Use img-fluid from Bootstrap */
+    box-shadow: var(--box-shadow-lg); /* Apply shadow directly */
+}
+
+.info-right h2 {
+    /* Use section-title styles */
+}
+
+.info-right p {
+    /* Use section-subtitle styles */
+}
+
+.info-right .cta-button {
+     /* Uses btn, btn-secondary styles */
+}
+
+
+/* --- Trends Section --- */
+.trends-section {
+    /* Uses section-padding, bg-light-gray */
+    position: relative; /* For potential background shapes */
+    overflow: hidden; /* Keep overflow hidden */
+}
+
+/* Optional: Adjust background shape position if needed */
+.trends-section::before {
+    content: '';
+    position: absolute;
+    top: -50px; /* Adjust position */
+    right: -100px; /* Adjust position */
+    left: auto; /* Reset left */
+    width: 350px; /* Adjust size */
+    height: 350px; /* Adjust size */
+    background-color: rgba(40, 167, 69, 0.05);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.trends-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Text column specific styles (optional) */
+.trends-section .col-lg-6 {
+    /* Add specific padding if needed */
+}
+
+/* Image column specific styles */
+.trends-section .trends-image-container img {
+    /* Image takes full width of its container */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--border-radius-lg); /* Slightly larger radius */
+    /* Using shadow-lg from Bootstrap */
+}
+
+/* Button stays mostly the same */
+.trends-button {
+    /* Uses btn, btn-primary styles */
+    /* Add margin-top on smaller screens if needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    .trends-section .text-lg-start {
+        text-align: center !important; /* Center text on medium/small screens */
+    }
+    .trends-section .justify-content-between {
+        justify-content: center !important; /* Center columns */
+    }
+     .trends-section .trends-image-container img {
+        max-width: 80%; /* Reduce image size slightly when stacked */
+        margin: 0 auto; /* Center image */
+     }
+    .trends-section::before {
+        /* Optionally hide or reposition the shape on mobile */
+        display: none;
+    }
+}
+
+
+/* --- Footer Styles --- */
+.site-footer {
+    background-color: var(--text-dark); /* Dark background */
+    padding: 60px 0 30px 0; /* More padding top */
+    color: rgba(255, 255, 255, 0.7); /* Lighter text on dark bg */
+    font-size: 14px;
+}
+
+.footer-column h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 25px;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-column.quick-nav h3::after,
+.footer-column.policy-terms h3::after,
+.footer-column.social-media h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    height: 2px;
+    width: 40px;
+    background-color: var(--primary-green); /* Use primary green for accent */
+}
+
+.footer-brand {
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 10px !important;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+.footer-tagline {
+    font-size: 13px;
+    margin-bottom: 20px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.contact-item i {
+    margin-right: 12px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    color: var(--primary-green); /* Icon color */
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: inline-block; /* Needed for padding transition */
+}
+
+.footer-column ul li a:hover {
+    color: #fff;
+    padding-left: 5px; /* Subtle shift on hover */
+}
+
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon {
+    color: var(--text-dark); /* Icon color */
+    background-color: rgba(255, 255, 255, 0.9); /* Background */
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background-color: var(--primary-green);
+    color: #fff;
+    transform: translateY(-3px); /* Lift effect */
+}
+
+.footer-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 40px 0 30px 0;
+}
+
+.footer-copyright {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- Animations --- */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) {
+    h2.section-title { font-size: 2rem; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero p.lead { font-size: 1.1rem; }
+    .section-padding { padding: 60px 0; }
+    .info-left img { margin-bottom: 30px; } /* Add space when stacked */
+    .trends-image-container img { max-width: 90%; }
+    .footer-column h3 { margin-bottom: 20px; }
+}
+
+@media (max-width: 767px) {
+    .navbar-custom .container { justify-content: space-between; } /* Ensure space for toggler */
+    .nav-center { display: none; } /* Handled by d-none d-lg-flex */
+    .header-actions .btn-login { display: none; } /* Hide login button next to toggle */
+    #mobileNav .btn-login { display: block; margin-top: 15px; text-align: center; } /* Show login in mobile menu */
+
+    h2.section-title { font-size: 1.8rem; }
+    .hero { height: 500px; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p.lead { font-size: 1rem; }
+    .btn { padding: 10px 25px; font-size: 13px; }
+    .btn-lg { padding: 12px 30px; font-size: 14px; }
+    .section-padding { padding: 50px 0; }
+    .trends-image-container img { max-width: 100%; }
+    .footer-container { text-align: center; } /* Center text in columns */
+    .footer-column h3::after { left: 50%; transform: translateX(-50%); } /* Center underline */
+    .contact-item, .social-icons { justify-content: center; } /* Center icons/contact */
+}
+
+@media (max-width: 576px) {
+    .hero h1 { font-size: 1.9rem; }
+    .logo-text { font-size: 24px; }
+    .slogan { display: none; } /* Hide slogan on very small screens */
+}

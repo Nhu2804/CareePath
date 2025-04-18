@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Added Viewport -->
+    <title>{% block title %}CareerPath{% endblock %}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts (Example: Poppins + perhaps another like Lato or Open Sans for body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header class="navbar-custom sticky-top"> <!-- Added sticky-top -->
+        <div class="container d-flex justify-content-between align-items-center"> <!-- Use Bootstrap container -->
+            <a href="/" class="logo-link">
+                <div class="logo">
+                    <div class="logo-text">
+                        <span class="brand-main">CAREER</span><span class="brand-highlight">PATH</span>
+                    </div>
+                    <div class="slogan">
+                        🚀 Lộ trình sự nghiệp, bứt phá tương lai!
+                    </div>
+                </div>
+            </a>            
+
+            <nav class="nav-center d-none d-lg-flex"> <!-- Hide on smaller screens, use flex -->
+                <div class="dropdown">
+                    <!-- REMOVED data-bs-toggle="dropdown" -->
+                    <a class="nav-link dropdown-toggle" href="#" role="button" aria-expanded="false">
+                        Trắc nghiệm bản thân 
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-user-graduate fa-fw me-2 text-primary-green opacity-75"></i>Học sinh</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-university fa-fw me-2 text-primary-green opacity-75"></i>Sinh viên</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-briefcase fa-fw me-2 text-primary-green opacity-75"></i>Người đi làm</a></li>
+                    </ul>
+                </div>
+                <a class="nav-link" href="#">Xu hướng ngành nghề</a>
+                <a class="nav-link" href="#">Premium</a>
+            </nav>
+
+            <div class="header-actions d-flex align-items-center">
+                 <a href="#" class="btn btn-primary btn-login">Đăng nhập</a>
+                 <!-- Add a mobile menu toggle button -->
+                 <button class="navbar-toggler d-lg-none ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
+                     <i class="fas fa-bars"></i>
+                 </button>
+            </div>
+        </div>
+        <!-- Mobile Navigation Collapse -->
+        <div class="collapse navbar-collapse d-lg-none" id="mobileNav">
+             <div class="container py-3">
+                <div class="dropdown mb-2">
+                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                         Trắc nghiệm bản thân
+                     </a>
+                     <ul class="dropdown-menu">
+                         <li><a class="dropdown-item" href="#">Học sinh</a></li>
+                         <li><a class="dropdown-item" href="#">Sinh viên</a></li>
+                         <li><a class="dropdown-item" href="#">Người đi làm</a></li>
+                     </ul>
+                 </div>
+                 <a class="nav-link mb-2" href="#">Xu hướng ngành nghề</a>
+                 <a class="nav-link" href="#">Premium</a>
+             </div>
+         </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ======================= FOOTER ======================= -->
+    <footer class="site-footer">
+        <div class="container">
+             <div class="row gy-4"> <!-- Use Bootstrap grid with gutter -->
+                 <!-- Cột 1: Brand & Liên hệ -->
+                 <div class="col-lg-4 col-md-6 footer-column brand-contact">
+                     <h3 class="footer-brand">CAREERPATH</h3>
+                     <p class="footer-tagline">Lộ trình sự nghiệp, bứt phá tương lai!</p>
+                     <div class="contact-item">
+                         <i class="fas fa-phone-alt"></i>
+                         <span>0123 456 789</span>
+                     </div>
+                     <div class="contact-item">
+                         <i class="fas fa-envelope"></i>
+                         <span>support@careerpath.vn</span>
+                     </div>
+                 </div>
+
+                 <!-- Cột 2: Điều Hướng Nhanh -->
+                 <div class="col-lg-2 col-md-6 footer-column quick-nav">
+                     <h3>Khám phá</h3>
+                     <ul>
+                         <li><a href="#">Trắc nghiệm</a></li>
+                         <li><a href="#">Xu hướng</a></li>
+                         <li><a href="#">Premium</a></li>
+                         <li><a href="#">Blog</a></li> <!-- Example addition -->
+                     </ul>
+                 </div>
+
+                 <!-- Cột 3: Chính Sách -->
+                 <div class="col-lg-3 col-md-6 footer-column policy-terms">
+                     <h3>Thông tin</h3>
+                     <ul>
+                         <li><a href="#">Về CareerPath</a></li> <!-- Example addition -->
+                         <li><a href="#">Chính sách bảo mật</a></li>
+                         <li><a href="#">Điều khoản sử dụng</a></li>
+                         <li><a href="#">Liên hệ</a></li> <!-- Example addition -->
+                     </ul>
+                 </div>
+
+                 <!-- Cột 4: Liên hệ Social -->
+                 <div class="col-lg-3 col-md-6 footer-column social-media">
+                     <h3>Kết nối với chúng tôi</h3>
+                     <div class="social-icons">
+                         <a href="#" aria-label="Facebook" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                         <a href="#" aria-label="Instagram" class="social-icon"><i class="fab fa-instagram"></i></a>
+                         <a href="#" aria-label="LinkedIn" class="social-icon"><i class="fab fa-linkedin-in"></i></a> <!-- Example addition -->
+                         <a href="#" aria-label="Youtube" class="social-icon"><i class="fab fa-youtube"></i></a>   <!-- Example addition -->
+                     </div>
+                 </div>
+             </div>
+             <hr class="footer-divider">
+            <div class="text-center footer-copyright">
+                © {% now "Y" %} CareerPath. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS (for dropdown and mobile toggle to work) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
