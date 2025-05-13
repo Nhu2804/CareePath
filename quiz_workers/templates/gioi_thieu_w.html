@@ -1,0 +1,199 @@
+{% extends "base.html" %}
+{% load static %}
+
+{# Đổi Title cho phù hợp #}
+{% block title %}Nâng Tầm Sự Nghiệp - Đánh Giá & Phát Triển Kỹ Năng - CareerPath{% endblock %}
+
+{% block content %}
+<!-- Link CSS (Có thể dùng file riêng nếu muốn tùy chỉnh nhiều: quiz_professional.css) -->
+<link rel="stylesheet" href="{% static 'css/quiz_workers.css' %}"> {# Hoặc giữ file cũ nếu ít thay đổi CSS #}
+
+<!-- ======================= Professional Quiz Intro Header ======================= -->
+<section class="quiz-intro-header section-padding bg-light-green">
+    <div class="container">
+        <div class="row align-items-center g-4"> 
+            <div class="col-lg-7">
+                <h1 class="header-main-title mb-3">Nâng Tầm <span class="highlight-yellow">Sự Nghiệp</span> Của Bạn</h1>
+                <p class="header-lead-text mb-4">
+                    Trong môi trường cạnh tranh, việc liên tục trau dồi kỹ năng là yếu tố then chốt để bứt phá. CareerPath giúp bạn định vị năng lực, xác định lộ trình phát triển và tối ưu hóa cơ hội thăng tiến.
+                </p>
+                <a href="#professional-quiz-steps" class="btn btn-primary btn-lg me-2 mb-2">Tìm hiểu quy trình <i class="fas fa-arrow-down ms-2"></i></a>
+                <a href="#" class="btn btn-secondary btn-lg mb-2">Bắt đầu Đánh Giá <i class="fas fa-chart-line ms-2"></i></a>
+                
+            </div>
+            <div class="col-lg-4 d-none d-lg-block text-center" style="margin-left: 95px;">
+                <img src="{% static 'images/Milestones of business projects-amico.svg' %}"
+                    alt="Phát triển sự nghiệp chuyên nghiệp"
+                    class="img-fluid header-illustration">
+            </div>
+        </div>
+    </div>
+   
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+</section>
+
+<!-- ======================= Why Assess for Professionals? ======================= -->
+<section class="benefits-section section-padding">
+    <div class="container">
+        {# Tiêu đề section mới #}
+        <h2 class="section-title text-center mb-5">Lợi ích khi đánh giá năng lực định kỳ</h2>
+        <div class="row g-4">
+            <!-- Benefit 1 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #ffc107;"><i class="fas fa-map-marker-alt fa-3x"></i></div>
+                    <h4 class="benefit-title">Định Vị Bản Thân</h4>
+                    <p>Hiểu rõ điểm mạnh và vị thế năng lực hiện tại trong ngành.</p>
+                </div>
+            </div>
+            <!-- Benefit 2 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #2e8b57;"><i class="fas fa-crosshairs fa-3x"></i></div>
+                    <h4 class="benefit-title">Xác Định Lỗ Hổng</h4>
+                    <p>Nhận diện kỹ năng cần bổ sung để đạt mục tiêu thăng tiến.</p>
+                </div>
+            </div>
+            <!-- Benefit 3 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #17a2b8;"><i class="fas fa-route fa-3x"></i></div>
+                    <h4 class="benefit-title">Lộ Trình Tối Ưu</h4>
+                    <p>Nhận gợi ý khóa học, chứng chỉ, hoạt động phù hợp.</p>
+                </div>
+            </div>
+             <!-- Benefit 4 -->
+             <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #fd7e14;"><i class="fas fa-level-up-alt fa-3x"></i></div>
+                    <h4 class="benefit-title">Tối Ưu Cơ Hội</h4>
+                    <p>Nâng cao năng lực cạnh tranh, sẵn sàng cho vị trí cao hơn.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Professional Quiz Steps ======================= -->
+<section id="professional-quiz-steps" class="process-section section-padding bg-light-gray">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Quy trình đánh giá & phát triển chuyên nghiệp</h2>
+        <div class="row g-4 justify-content-center align-items-stretch">
+            <!-- Step 1 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">01</div>
+                    <div class="process-icon"><i class="fas fa-clipboard-check"></i></div>
+                    <h4 class="process-title">Đánh Giá Toàn Diện</h4>
+                    <p>Phản ánh về kinh nghiệm, kỹ năng và mục tiêu sự nghiệp của bạn.</p>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">02</div>
+                    <div class="process-icon"><i class="fas fa-balance-scale-right"></i></div>
+                    <h4 class="process-title">Phân Tích & So Sánh</h4>
+                    <p>Hệ thống đối chiếu năng lực với yêu cầu vị trí mục tiêu.</p>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">03</div>
+                    <div class="process-icon"><i class="fas fa-file-signature"></i></div>
+                    <h4 class="process-title">Nhận Báo Cáo</h4>
+                    <p>Xem phân tích chi tiết điểm mạnh, yếu và gợi ý phát triển cụ thể.</p>
+                </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">04</div>
+                    <div class="process-icon"><i class="fas fa-calendar-check"></i></div>
+                    <h4 class="process-title">Kế Hoạch Hành Động</h4>
+                    <p>Xây dựng lộ trình học tập, thực hành cá nhân hóa và hiệu quả.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Professional Focus Skills ======================= -->
+<section id="professional-focus-areas" class="career-section section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Các nhóm kỹ năng then chốt để thăng tiến</h2>
+        <div class="row g-4 justify-content-center">
+            <!-- Card 1: Kỹ năng Lãnh đạo & Quản lý -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-primary"><i class="fas fa-users"></i></div>
+                        <h3>Lãnh đạo & Quản lý</h3>
+                        <p class="keywords">Dẫn dắt đội nhóm, Ra quyết định...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-primary-light">
+                        <h4><i class="fas fa-user-tie me-2 opacity-75"></i>Trọng tâm</h4>
+                        <p>Năng lực truyền cảm hứng, định hướng và phát triển đội ngũ hiệu quả.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-lightbulb me-2 opacity-75"></i>Ví dụ:</h5>
+                        <p class="card-back-text">Xây dựng đội nhóm, Giao tiếp chiến lược, Đàm phán, Quản lý xung đột.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-briefcase me-1 opacity-75"></i>Vai trò: Team Leader, Manager, Project Manager...</i></small>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2: Kỹ năng Chuyên môn Sâu -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-success"><i class="fas fa-cogs"></i></div>
+                        <h3>Chuyên môn Sâu</h3>
+                        <p class="keywords">Kiến thức ngành, Công cụ, Quy trình...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-success-light">
+                        <h4><i class="fas fa-tools me-2 opacity-75"></i>Trọng tâm</h4>
+                        <p>Sự am hiểu sâu sắc và khả năng ứng dụng kiến thức, công nghệ cốt lõi.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-lightbulb me-2 opacity-75"></i>Ví dụ:</h5>
+                        <p class="card-back-text">Phân tích dữ liệu nâng cao, Lập trình chuyên sâu, Quản trị hệ thống, Nghiệp vụ kế toán/tài chính.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-briefcase me-1 opacity-75"></i>Vai trò: Senior Developer, Expert, Analyst, Specialist...</i></small>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: Kỹ năng Chiến lược & Đổi mới -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                         {# Đổi Icon và Màu (Ví dụ: Dùng màu Cam - orange) #}
+                        <div class="cc-icon-wrapper bg-orange"><i class="fas fa-chess-knight"></i></div>
+                        <h3>Chiến lược & Đổi mới</h3>
+                        <p class="keywords">Tư duy hệ thống, Giải pháp mới...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    {# Đổi màu nền mặt sau (Ví dụ: bg-orange-light) #}
+                    <div class="card-back bg-orange-light">
+                        <h4><i class="fas fa-lightbulb me-2 opacity-75"></i>Trọng tâm</h4>
+                        <p>Khả năng nhìn xa, hoạch định và đề xuất các giải pháp mang tính đột phá.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-lightbulb me-2 opacity-75"></i>Ví dụ:</h5>
+                        <p class="card-back-text">Tư duy chiến lược, Quản lý sự thay đổi, Đổi mới sáng tạo, Phân tích thị trường.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-briefcase me-1 opacity-75"></i>Vai trò: Strategist, Product Manager, Business Development...</i></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Call to Action (Professional) ======================= -->
+<section class="final-cta-section section-padding">
+    <div class="container">
+        <div class="cta-frame text-center">
+            <h2 class="final-cta-title mb-3">Sẵn sàng bứt phá sự nghiệp?</h2>
+            <p class="final-cta-subtitle mb-4">Đầu tư vào phát triển bản thân là khoản đầu tư mang lại lợi nhuận cao nhất!</p>
+            <a href="#" class="btn btn-primary btn-lg">BẮT ĐẦU ĐÁNH GIÁ NGAY <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

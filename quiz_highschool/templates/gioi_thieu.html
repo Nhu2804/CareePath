@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Khám Phá Ngành Nghề Phù Hợp - CareerPath{% endblock %}
+
+{% block content %}
+<!-- Link CSS mới, nên đặt tên khác file cũ -->
+<link rel="stylesheet" href="{% static 'css/quiz_highschool.css' %}">
+
+<!-- ======================= Quiz Intro Header ======================= -->
+<section class="quiz-intro-header section-padding bg-light-green">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <h1 class="header-main-title mb-3">Bạn <span class="highlight-yellow">Hợp</span> Với Ngành Nào?</h1>
+                <p class="header-lead-text mb-4">Chọn ngành, chọn trường là bước ngoặt quan trọng. Đừng lo lắng! Hãy cùng CareerPath khám phá tiềm năng bản thân và tìm ra con đường sự nghiệp tỏa sáng dành riêng cho bạn.</p>
+                <a href="#quiz-process" class="btn btn-primary btn-lg me-2 mb-2">Tìm hiểu quy trình <i class="fas fa-arrow-down ms-2"></i></a>
+                <a href="#" class="btn btn-secondary btn-lg mb-2">Làm Test Ngay <i class="fas fa-pencil-alt ms-2"></i></a>          
+            </div>
+            <div class="col-lg-4 d-none d-lg-block text-center" style="margin-left: 95px;">
+                 <!-- Ảnh illustration/vector phù hợp với học sinh/định hướng -->
+                <img src="{% static 'images/Job hunt-bro.svg' %}" alt="Khám phá định hướng nghề nghiệp" class="img-fluid header-illustration">
+            </div>
+        </div>
+    </div>
+    <!-- Optional: Subtle background shapes -->
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+</section>
+
+<!-- ======================= Why Take This Quiz? ======================= -->
+<section class="benefits-section section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Tại sao nên làm bài trắc nghiệm này?</h2>
+        <div class="row g-4">
+            <!-- Benefit 1 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #ffc107;"><i class="fas fa-lightbulb fa-3x"></i></div>
+                    <h4 class="benefit-title">Hiểu Rõ Bản Thân</h4>
+                    <p>Nhận diện điểm mạnh, yếu, sở thích và giá trị cốt lõi của bạn.</p>
+                </div>
+            </div>
+            <!-- Benefit 2 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #2e8b57;"><i class="fas fa-map-signs fa-3x"></i></div>
+                    <h4 class="benefit-title">Định Hướng Rõ Ràng</h4>
+                    <p>Khám phá các nhóm ngành nghề phù hợp nhất với hồ sơ cá nhân.</p>
+                </div>
+            </div>
+            <!-- Benefit 3 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #17a2b8;"><i class="fas fa-graduation-cap fa-3x"></i></div> 
+                    <h4 class="benefit-title">Chọn Ngành Tự Tin</h4>
+                    <p>Có cơ sở khoa học để đưa ra quyết định chọn trường, chọn ngành.</p>
+                </div>
+            </div>
+             <!-- Benefit 4 -->
+             <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #fd7e14;"><i class="fas fa-chart-line fa-3x"></i></div> 
+                    <h4 class="benefit-title">Nắm Bắt Tương Lai</h4>
+                    <p>Hiểu rõ hơn về xu hướng và yêu cầu của thị trường lao động.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Quiz Process/Steps ======================= -->
+<section id="quiz-process" class="process-section section-padding bg-light-gray">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Quy trình khám phá chỉ trong 3 bước</h2>
+        <div class="row g-4 justify-content-center align-items-stretch">
+            <!-- Step 1 -->
+            <div class="col-md-4 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">01</div>
+                    <div class="process-icon"><i class="fas fa-tasks"></i></div>
+                    <h4 class="process-title">Trả lời câu hỏi</h4>
+                    <p>Hoàn thành bộ câu hỏi đa dạng về sở thích và tình huống thực tế.</p>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="col-md-4 d-flex">
+                 <div class="process-card text-center">
+                    <div class="process-number">02</div>
+                    <div class="process-icon"><i class="fas fa-cogs"></i></div>
+                    <h4 class="process-title">Hệ thống phân tích</h4>
+                    <p>CareerPath sử dụng thuật toán để đối chiếu câu trả lời của bạn.</p>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="col-md-4 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">03</div>
+                    <div class="process-icon"><i class="fas fa-file-alt"></i></div>
+                    <h4 class="process-title">Nhận kết quả chi tiết</h4>
+                    <p>Xem báo cáo các nhóm ngành phù hợp và gợi ý ngành học cụ thể.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Career Groups (Improved Flip Cards) ======================= -->
+<section id="career-groups" class="career-section section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Tham khảo các nhóm ngành nghề</h2>
+        <div class="row g-4 justify-content-center">
+
+            <!-- Card 1: Kinh doanh - Quản lý -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-primary-green"><i class="fas fa-briefcase"></i></div>
+                        <h3>Kinh doanh – Quản lý</h3>
+                        <p class="keywords">Lãnh đạo, chiến lược, tài chính...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-primary-green-light">
+                        <h4><i class="fas fa-users me-2 opacity-75"></i>Ai phù hợp?</h4>
+                        <p>Người năng động, thích tương tác, có tư duy logic, thích quản lý, tổ chức và dẫn dắt.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-cogs me-2 opacity-75"></i>Kỹ năng cần có:</h5>
+                        <p class="card-back-text">Giao tiếp, giải quyết vấn đề, làm việc nhóm, ra quyết định.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-graduation-cap me-1 opacity-75"></i>Ngành/Vị trí: Quản trị Kinh doanh, Marketing, Tài chính - Ngân hàng, Quản trị Nhân lực, Logistics và Quản lý chuỗi cung ứng,...</i></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Công nghệ - Kỹ thuật -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                     <div class="card-front">
+                        <div class="cc-icon-wrapper bg-primary-yellow"><i class="fas fa-laptop-code"></i></div>
+                        <h3>Công nghệ – Kỹ thuật</h3>
+                         <p class="keywords">Sáng tạo máy móc, giải quyết vấn đề...</p>
+                         <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-primary-yellow-light">
+                        <h4><i class="fas fa-user-cog me-2 opacity-75"></i>Ai phù hợp?</h4>
+                        <p>Người yêu thích công nghệ, tư duy logic, thích sự chính xác, khám phá và sáng tạo giải pháp.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-cogs me-2 opacity-75"></i>Kỹ năng cần có:</h5>
+                        <p class="card-back-text">Tư duy phản biện, lập trình (nếu có), học hỏi nhanh, kiên trì.</p>
+                         <small class="suggested-majors"><i><i class="fas fa-graduation-cap me-1 opacity-75"></i>Ngành/Vị trí: Công nghệ Thông tin, Kỹ thuật Phần mềm, Khoa học Dữ liệu, Trí tuệ Nhân tạo,Kỹ thuật Cơ khí,...</i></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Sáng tạo - Nghệ thuật -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                     <div class="card-front">
+                        <div class="cc-icon-wrapper bg-info"><i class="fas fa-paint-brush"></i></div>
+                        <h3>Sáng tạo – Nghệ thuật</h3>
+                        <p class="keywords">Thiết kế, mỹ thuật, truyền thông...</p>
+                         <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-info-light">
+                        <h4><i class="fas fa-palette me-2 opacity-75"></i>Ai phù hợp?</h4>
+                        <p>Người giàu trí tưởng tượng, gu thẩm mỹ tốt, thích thể hiện cá tính, nhạy cảm với cái đẹp.</p>
+                         <h5 class="card-back-subtitle"><i class="fas fa-cogs me-2 opacity-75"></i>Kỹ năng cần có:</h5>
+                        <p class="card-back-text">Sáng tạo, sử dụng công cụ (vẽ, phần mềm), tư duy hình ảnh.</p>
+                         <small class="suggested-majors"><i><i class="fas fa-graduation-cap me-1 opacity-75"></i>Ngành/Vị trí: Thiết kế Đồ họa, Truyền thông Đa phương tiện, Nhiếp ảnh, Thiết kế Game, Thiết kế Thời trang, Mỹ thuật Ứng dụng,...</i></small>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 4: Y tế - Sức khỏe -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-danger"><i class="fas fa-heartbeat"></i></div>
+                        <h3>Y tế – Sức khỏe</h3>
+                        <p class="keywords">Chăm sóc, nghiên cứu sinh học...</p>
+                         <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-danger-light">
+                         <h4><i class="fas fa-user-md me-2 opacity-75"></i>Ai phù hợp?</h4>
+                        <p>Người thích chăm sóc sức khỏe, có lòng nhân ái, cẩn thận, tỉ mỉ và chịu được áp lực.</p>
+                         <h5 class="card-back-subtitle"><i class="fas fa-cogs me-2 opacity-75"></i>Kỹ năng cần có:</h5>
+                        <p class="card-back-text">Quan sát, đồng cảm, kiến thức khoa học, sự khéo léo.</p>
+                         <small class="suggested-majors"><i><i class="fas fa-graduation-cap me-1 opacity-75"></i>Ngành/Vị trí: Y khoa (Bác sĩ), Dược học (Dược sĩ), Điều dưỡng, Kỹ thuật Y sinh, Tâm lý học lâm sàng, Dinh dưỡng học,...</i></small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Xã hội - Nhân văn -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        {# **ĐỔI MÀU ICON** #}
+                        <div class="cc-icon-wrapper bg-orange"> <i class="fas fa-users"></i></div>
+                        <h3>Xã hội – Nhân văn</h3>
+                        <p class="keywords">Giao tiếp, ngôn ngữ, giúp đỡ...</p>
+                         <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    {# **ĐỔI MÀU NỀN MẶT SAU** #}
+                    <div class="card-back bg-orange-light">
+                        <h4><i class="fas fa-comments me-2 opacity-75"></i>Ai phù hợp?</h4>
+                        <p>Người thích giao tiếp, đọc, viết, tìm hiểu con người & xã hội, khả năng ngôn ngữ tốt.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-cogs me-2 opacity-75"></i>Kỹ năng cần có:</h5>
+                        <p class="card-back-text">Lắng nghe, thấu hiểu, tư duy phân tích, trình bày.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-graduation-cap me-1 opacity-75"></i>Ngành/Vị trí: Luật, Sư phạm (Giáo viên), Báo chí - Truyền thông, Tâm lý học, Ngôn ngữ Anh (Biên/Phiên dịch), Quản trị Du lịch và Lữ hành,...</i></small>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Card 6: Khoa học Tự nhiên -->
+             <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                     <div class="card-front">
+                        {# **ĐỔI MÀU ICON** #}
+                        <div class="cc-icon-wrapper bg-purple"> <i class="fas fa-flask"></i></div>
+                        <h3>Khoa học Tự nhiên</h3>
+                        <p class="keywords">Nghiên cứu, thí nghiệm, tự nhiên...</p>
+                         <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    {# **ĐỔI MÀU NỀN MẶT SAU** #}
+                    <div class="card-back bg-purple-light">
+                        <h4><i class="fas fa-atom me-2 opacity-75"></i>Ai phù hợp?</h4>
+                        <p>Người thích tìm tòi, khám phá quy luật, tư duy phản biện, làm việc với số liệu, kiên trì.</p>
+                         <h5 class="card-back-subtitle"><i class="fas fa-cogs me-2 opacity-75"></i>Kỹ năng cần có:</h5>
+                        <p class="card-back-text">Nghiên cứu khoa học, phân tích dữ liệu, thực hành thí nghiệm.</p>
+                         <small class="suggested-majors"><i><i class="fas fa-graduation-cap me-1 opacity-75"></i>Ngành/Vị trí: Sinh học, Hóa học, Vật lý học, Toán học, Khoa học Môi trường, Công nghệ Sinh học,...</i></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Final CTA ======================= -->
+<section class="final-cta-section section-padding"> {# Giữ lại section-padding để tạo khoảng cách #}
+    <div class="container">
+        <div class="cta-frame text-center"> {# ** Thêm thẻ div này ** #}
+            <h2 class="final-cta-title mb-3">Sẵn sàng bắt đầu hành trình khám phá?</h2>
+            <p class="final-cta-subtitle mb-4">Bài trắc nghiệm hoàn toàn miễn phí và chỉ mất vài phút!</p>
+            {# Có thể đổi lại thành nút primary nếu nền frame là trắng/sáng #}
+            <a href="#" class="btn btn-primary btn-lg">LÀM TRẮC NGHIỆM NGAY <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

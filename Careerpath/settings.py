@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'main',
-    #'quiz',
-
+    'quiz_highschool',
+    'quiz_university',
+    'quiz_workers'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Đánh Giá & Phát Triển Kỹ Năng - CareerPath{% endblock %}
+
+{% block content %}
+<!-- Link CSS -->
+<link rel="stylesheet" href="{% static 'css/quiz_university.css' %}">
+
+<!-- ======================= Student Quiz Intro Header ======================= -->
+<section class="quiz-intro-header section-padding bg-light-green">
+    <div class="container">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+                <h1 class="header-main-title mb-3">Khám Phá <span class="highlight-yellow">Tiềm Năng</span> Của Bạn</h1>
+                <p class="header-lead-text mb-4">
+                    Đam mê học tập là bước đầu, nhưng kỹ năng là chìa khóa giúp bạn tỏa sáng! Hãy cùng CareerPath khám phá bản thân, trang bị kiến thức và kỹ năng để tự tin bước vào tương lai nghề nghiệp mơ ước.
+                </p>
+                <a href="#student-quiz-steps" class="btn btn-primary btn-lg me-2 mb-2">Tìm hiểu quy trình <i class="fas fa-arrow-down ms-2"></i></a>
+                <a href="#" class="btn btn-secondary btn-lg mb-2">Bắt đầu Đánh Giá <i class="fas fa-rocket ms-2"></i></a>
+            </div>
+            <div class="col-lg-4 d-none d-lg-block text-center" style="margin-left: 95px;">
+                <img src="{% static 'images/Soft skills-bro.svg' %}" 
+                    alt="Phát triển kỹ năng sinh viên" 
+                    class="img-fluid header-illustration">
+            </div>
+
+        </div>
+    </div>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+</section>
+
+
+<!-- ======================= Why Assess Your Skills? ======================= -->
+<section class="benefits-section section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Tại sao nên đánh giá kỹ năng?</h2>
+        <div class="row g-4">
+            <!-- Benefit 1 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #ffc107;"><i class="fas fa-user-check fa-3x"></i></div>
+                    <h4 class="benefit-title">Hiểu Rõ Năng Lực</h4>
+                    <p>Xác định kỹ năng bạn đang sở hữu và mức độ thành thạo.</p>
+                </div>
+            </div>
+            <!-- Benefit 2 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #2e8b57;"><i class="fas fa-bullseye fa-3x"></i></div>
+                    <h4 class="benefit-title">Tìm Khoảng Trống</h4>
+                    <p>Nhận diện kỹ năng cần cải thiện cho mục tiêu nghề nghiệp.</p>
+                </div>
+            </div>
+            <!-- Benefit 3 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #17a2b8;"><i class="fas fa-road fa-3x"></i></div>
+                    <h4 class="benefit-title">Lộ Trình Cá Nhân</h4>
+                    <p>Nhận gợi ý khóa học, dự án để phát triển kỹ năng.</p>
+                </div>
+            </div>
+            <!-- Benefit 4 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="benefit-card text-center flex-fill">
+                    <div class="benefit-icon" style="color: #fd7e14;"><i class="fas fa-chart-line fa-3x"></i></div>
+                    <h4 class="benefit-title">Chuẩn Bị Tương Lai</h4>
+                    <p>Hiểu yêu cầu thị trường và sẵn sàng cho công việc.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Student Quiz Steps ======================= -->
+<section id="student-quiz-steps" class="process-section section-padding bg-light-gray">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Quy trình đánh giá kỹ năng trong 4 bước</h2>
+        <div class="row g-4 justify-content-center align-items-stretch">
+            <!-- Step 1 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">01</div>
+                    <div class="process-icon"><i class="fas fa-user-edit"></i></div>
+                    <h4 class="process-title">Tự Đánh Giá</h4>
+                    <p>Trả lời câu hỏi về kinh nghiệm, kỹ năng và mục tiêu nghề nghiệp.</p>
+                </div>
+            </div>
+            <!-- Step 2 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">02</div>
+                    <div class="process-icon"><i class="fas fa-tasks"></i></div>
+                    <h4 class="process-title">Phân Tích</h4>
+                    <p>Hệ thống đối chiếu kỹ năng với yêu cầu công việc.</p>
+                </div>
+            </div>
+            <!-- Step 3 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">03</div>
+                    <div class="process-icon"><i class="fas fa-chart-bar"></i></div>
+                    <h4 class="process-title">Nhận Báo Cáo</h4>
+                    <p>Xem báo cáo chi tiết về điểm mạnh và gợi ý phát triển.</p>
+                </div>
+            </div>
+            <!-- Step 4 -->
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="process-card text-center">
+                    <div class="process-number">04</div>
+                    <div class="process-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h4 class="process-title">Lên Kế Hoạch</h4>
+                    <p>Xây dựng lộ trình phát triển kỹ năng cá nhân hóa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Focus Skills / Career Fields ======================= -->
+<section id="student-focus-areas" class="career-section section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Các nhóm kỹ năng trọng tâm</h2>
+        <div class="row g-4 justify-content-center">
+            <!-- Card 1: Kỹ năng Chuyên môn -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-primary-green"><i class="fas fa-code"></i></div>
+                        <h3>Kỹ năng Chuyên môn</h3>
+                        <p class="keywords">Lập trình, Phân tích, Thiết kế...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-primary-green-light">
+                        <h4><i class="fas fa-tools me-2 opacity-75"></i>Trọng tâm</h4>
+                        <p>Kiến thức và kỹ thuật đặc thù cho ngành nghề.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-lightbulb me-2 opacity-75"></i>Ví dụ:</h5>
+                        <p class="card-back-text">Python, SQL, Adobe Suite, Kỹ thuật cơ khí.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-bullseye me-1 opacity-75"></i>Lĩnh vực: Công nghệ, Kỹ thuật, Thiết kế...</i></small>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 2: Kỹ năng Mềm -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-primary-yellow"><i class="fas fa-users-cog"></i></div>
+                        <h3>Kỹ năng Mềm</h3>
+                        <p class="keywords">Giao tiếp, Lãnh đạo, Làm việc nhóm...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-primary-yellow-light">
+                        <h4><i class="fas fa-comments me-2 opacity-75"></i>Trọng tâm</h4>
+                        <p>Kỹ năng tương tác hiệu quả với người khác.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-lightbulb me-2 opacity-75"></i>Ví dụ:</h5>
+                        <p class="card-back-text">Tư duy phản biện, Quản lý thời gian, Thích ứng.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-bullseye me-1 opacity-75"></i>Lĩnh vực: Quản lý, Dịch vụ, Mọi ngành...</i></small>
+                    </div>
+                </div>
+            </div>
+            <!-- Card 3: Kỹ năng Tư duy & Sáng tạo -->
+            <div class="col-sm-6 col-lg-4">
+                <div class="career-card shadow-sm">
+                    <div class="card-front">
+                        <div class="cc-icon-wrapper bg-info"><i class="fas fa-brain"></i></div>
+                        <h3>Tư duy & Sáng tạo</h3>
+                        <p class="keywords">Phân tích, Đổi mới, Giải quyết vấn đề...</p>
+                        <span class="flip-hint"><i class="fas fa-sync-alt me-1"></i> Lật xem</span>
+                    </div>
+                    <div class="card-back bg-info-light">
+                        <h4><i class="fas fa-puzzle-piece me-2 opacity-75"></i>Trọng tâm</h4>
+                        <p>Phân tích và tạo giải pháp sáng tạo cho vấn đề.</p>
+                        <h5 class="card-back-subtitle"><i class="fas fa-lightbulb me-2 opacity-75"></i>Ví dụ:</h5>
+                        <p class="card-back-text">Tư duy logic, Thiết kế sáng tạo, Ra quyết định.</p>
+                        <small class="suggested-majors"><i><i class="fas fa-bullseye me-1 opacity-75"></i>Lĩnh vực: Công nghệ, Marketing, Khởi nghiệp...</i></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ======================= Call to Action ======================= -->
+<section class="final-cta-section section-padding">
+    <div class="container">
+        <div class="cta-frame text-center">
+            <h2 class="final-cta-title mb-3">Sẵn sàng nâng cấp kỹ năng?</h2>
+            <p class="final-cta-subtitle mb-4">Chỉ vài phút để khám phá lộ trình phát triển sự nghiệp của bạn!</p>
+            <a href="#" class="btn btn-primary btn-lg">BẮT ĐẦU ĐÁNH GIÁ NGAY <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

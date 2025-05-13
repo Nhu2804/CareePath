@@ -1,0 +1,622 @@
+/* --- Import Variables (Implicit via base.html loading style.css) --- */
+/* Define/Refine light/utility colors */
+:root {
+    /* Primary Colors (Keep from style.css) */
+    --primary-green: #28a745; 
+    --primary-yellow: #ffc107; 
+    --dark-green: #1e7e34; 
+    --text-dark: #212529; 
+    --text-medium: #495057; 
+    --border-color: #dee2e6; 
+    --box-shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075); 
+    --box-shadow-md: 0 .5rem 1rem rgba(0,0,0,.1); 
+    --border-radius-sm: 0.25rem; 
+    --border-radius-md: 0.5rem; 
+    --border-radius-lg: 0.8rem; 
+    --font-primary: 'Be Vietnam Pro', sans-serif; 
+    --font-secondary: 'Roboto', sans-serif; 
+
+    /* Light Green Variant (Brighter than before) */
+    --light-green-bg: #e6f7eb; /* Lighter and more opaque */
+    --light-yellow-bg: #fff8e1;
+
+    /* Accent Color (Example: Sky Blue) */
+    --accent-blue: #50b1f2;
+    --accent-blue-light: #e1f3fe;
+
+    /* BG colors for card backs (More Opaque & Readable) */
+    --bg-primary-green-card: #d1f4e0; /* Example light green */
+    --bg-primary-yellow-card: #fff5cc; /* Example light yellow */
+    --info: #0dcaf0; /* Bootstrap Info */
+    --bg-info-card: #cff4fc; /* Bootstrap light info */
+    --danger: #dc3545;
+    --orange: #fd7e14; /* Bootstrap Orange */
+    --purple: #6f42c1; /* Bootstrap Purple */
+    --bg-danger-card: #f8d7da; /* Bootstrap light danger */
+    --warning: #ffc107; /* Matches primary-yellow */
+    --bg-warning-card: var(--bg-primary-yellow-card);
+    --success: #198754;
+    --bg-success-card: #d1e7dd; /* Bootstrap light success */
+    --accent-blue-card-bg: var(--accent-blue-light);
+    --bg-orange-card: #ffe8cc; /* Hoặc mã màu cam nhạt bạn muốn */
+    --bg-purple-card: #e9dffc; /* Hoặc mã màu tím nhạt bạn muốn */
+    
+    /* Shadows */
+    --box-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.06);
+    --box-shadow-lifted: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* --- General Styles for this page --- */
+body {
+     background-color: #fdfdfd; /* Slightly off-white background */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    color: var(--text-dark);
+}
+p, li, small {
+    font-family: var(--font-secondary);
+    color: var(--text-medium);
+    line-height: 1.7; /* Consistent line height for paragraphs */
+}
+.section-title {
+    font-weight: 700; /* Ensure section titles are bold */
+    margin-bottom: 1rem; /* Default margin */
+}
+.section-title.mb-5 {
+    margin-bottom: 3rem !important; /* Keep Bootstrap spacing consistent */
+}
+.section-padding {
+    padding: 60px 0; /* Slightly reduced padding */
+}
+
+@media (min-width: 992px) {
+    .section-padding {
+        padding: 80px 0; /* Restore padding for larger screens */
+    }
+}
+
+/* --- Quiz Intro Header --- */
+.quiz-intro-header {
+    position: relative; /* **BẮT BUỘC: Làm gốc định vị và stacking context** */
+    overflow: hidden; /* Giữ các shapes không tràn quá xa */
+    background-color: var(--light-green-bg); /* Nền section */
+    /* Các padding, border khác giữ nguyên... */
+    padding-top: 80px;
+    padding-bottom: 80px;
+    /* border-bottom: 1px solid var(--border-color); */ /* Có thể bỏ border nếu muốn liền mạch */
+}
+
+.header-main-title {
+    font-size: clamp(2.6rem, 6vw, 4rem); /* Slightly larger */
+    font-weight: 800;
+    line-height: 1.25;
+}
+.header-main-title .highlight-yellow {
+     /* Add a subtle text shadow to yellow highlight */
+     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.header-lead-text {
+    font-size: 1.15rem; /* Slightly larger lead */
+    max-width: 650px;
+}
+
+.quiz-intro-header .container {
+    position: relative; /* **BẮT BUỘC: Để z-index hoạt động và tạo stacking context** */
+    z-index: 2;      /* **BẮT BUỘC: z-index cao hơn shapes** */
+    /* Container này chứa row, col-lg-7 (text, buttons), col-lg-5 (image) */
+}
+
+.quiz-intro-header .btn {
+    padding: 14px 35px; /* Custom padding for header buttons */
+    font-size: 0.95rem;
+}
+
+.header-illustration {
+    max-width: 100%;
+    height: auto;
+    /* Optional: Add a subtle animation */
+    animation: gentleBob 5s ease-in-out infinite;
+}
+
+@keyframes gentleBob {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* Background shapes - Make them softer */
+.shape {
+    position: absolute; /* **BẮT BUỘC: Định vị tuyệt đối trong header** */
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Organic shape */
+    opacity: 0.15; /* Độ mờ */
+    pointer-events: none; /* Không cho phép click vào shape */
+    filter: blur(10px); /* Làm mờ viền */
+    z-index: 1; /* **BẮT BUỘC: z-index thấp hơn container nội dung** */
+}
+
+.shape-1 {
+    width: 250px;
+    height: 250px;
+    background-color: var(--primary-green); /* Màu shape 1 */
+    top: 5%;
+    right: 8%;
+    animation: floatWobble 10s ease-in-out infinite alternate;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary-yellow); /* Màu shape 2 */
+    bottom: 10%;
+    left: 12%;
+    animation: floatWobble 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatWobble {
+  0% { transform: translateY(0px) rotate(0deg); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+  50% { transform: translateY(-25px) rotate(15deg); }
+  100% { transform: translateY(0px) rotate(-10deg); border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+}
+
+
+/* --- Benefits Section --- */
+.benefits-section {
+   /* Uses section-padding */
+   background-color: #fff; /* White background */
+}
+
+.benefit-card {
+    background-color: #fff;
+    padding: 35px 25px; /* More padding */
+    border-radius: var(--border-radius-lg); /* Larger radius */
+    border: none; /* Remove border */
+    box-shadow: var(--box-shadow-soft); /* Use softer shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden; /* For potential pseudo-elements */
+    border-top: 4px solid transparent; /* Placeholder for colored border */
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--box-shadow-lifted);
+    /* Add colored top border on hover based on icon color */
+}
+/* Example hover borders (add for each color used) */
+.benefit-card:has([style*="#ffc107"]):hover { border-top-color: #ffc107; }
+.benefit-card:has([style*="#2e8b57"]):hover { border-top-color: #2e8b57; }
+.benefit-card:has([style*="#17a2b8"]):hover { border-top-color: #17a2b8; }
+.benefit-card:has([style*="#fd7e14"]):hover { border-top-color: #fd7e14; }
+
+
+.benefit-icon {
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1); /* Slightly scale icon on hover */
+}
+
+.benefit-title {
+    font-size: 1.15rem; /* Slightly smaller title */
+    font-weight: 600; /* Less bold */
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.benefit-card p {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+/* --- Process Section --- */
+.process-section {
+   /* Uses section-padding, bg-light-gray */
+   background-color: var(--light-green-bg); /* Use light green bg */
+}
+
+.process-card {
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-soft);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none; /* Remove border */
+}
+.process-card:hover {
+     transform: translateY(-8px);
+    box-shadow: var(--box-shadow-lifted);
+}
+
+.process-number {
+    position: absolute;
+    top: 0;    /* **Đặt ở cạnh trên** */
+    left: 0;   /* **Đặt ở cạnh trái** */
+    width: 55px;  /* **Kích thước chiều rộng ô vuông** */
+    height: 55px; /* **Kích thước chiều cao ô vuông** */
+    background-color: var(--primary-green); /* **Nền xanh lá cây** */
+    color: #fff; /* **Chữ màu trắng** */
+    font-size: 1.6rem; /* **Kích thước số vừa vặn** */
+    font-weight: 700;  /* **Độ đậm vừa phải** */
+    line-height: 55px; /* Căn giữa số theo chiều dọc (bằng height) */
+    text-align: center; /* Căn giữa số theo chiều ngang */
+    /* **Bo góc dưới phải để khớp với bo góc card** */
+    border-radius: 16px 0 12px 0; /* Top-left(card) - Top-right - Bottom-right(custom) - Bottom-left */
+    z-index: 2; /* **Nằm trên nền card nhưng dưới icon nếu cần** */
+    opacity: 1; /* **Hiển thị rõ ràng** */
+    transform: none; /* **Bỏ transform cũ** */
+    user-select: none;
+    /* Hiệu ứng nhẹ khi hover (tùy chọn) */
+    transition: background-color 0.3s ease;
+}
+.process-card:hover .process-number {
+    background-color: var(--dark-green); /* Đậm hơn khi hover */
+}
+
+.process-icon {
+    font-size: 2rem; /* Smaller icon */
+    color: var(--primary-green);
+    margin-bottom: 20px;
+    display: inline-flex; /* Use flex for centering if needed */
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Give fixed size */
+    height: 60px;
+    background-color: var(--light-green-bg); /* Light green circle bg */
+    border-radius: 50%;
+    position: relative; /* Ensure icon is above number */
+    z-index: 1;
+}
+
+.process-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    position: relative;
+    z-index: 1;
+}
+
+.process-card p {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Career Groups Section (Flip Cards) --- */
+.career-section {
+    /* Uses section-padding */
+     background-color: #fff;
+}
+
+.career-card {
+    perspective: 1500px; /* **Tăng perspective để lật đỡ cong hơn** */
+    min-height: 300px; /* **Tăng nhẹ chiều cao tối thiểu nếu cần thêm không gian** */
+    position: relative;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    background-color: transparent;
+    box-shadow: none;
+    transition: transform 0.4s ease;
+}
+.career-card:hover {
+    transform: translateY(-8px);
+}
+
+
+.career-card .card-front,
+.career-card .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Quan trọng để thẻ chiếm đủ chiều cao */
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    /* **Hiệu ứng lật mượt hơn** */
+    transition: transform 0.9s ease-in-out;
+    display: flex; /* Sử dụng flex */
+    flex-direction: column; /* Hướng dọc */
+    align-items: center; /* Căn giữa theo chiều ngang */
+    /* **Điều chỉnh justify-content để cân bằng nội dung** */
+    justify-content: space-around; /* Hoặc center, space-between tùy ý */
+    padding: 30px 25px; /* **Padding bên trong thẻ** */
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-soft);
+}
+
+.career-card .card-front {
+    z-index: 2;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    transform: rotateY(0deg);
+    /* Căn chỉnh nội dung mặt trước nếu cần */
+    /* justify-content: center; */
+}
+
+.career-card .card-back {
+    z-index: 1;
+    transform: rotateY(180deg);
+    color: var(--text-dark);
+    border: 1px solid transparent;
+    /* Background color set via utility classes */
+}
+
+/* Style back based on bg color */
+.career-card .card-back.bg-primary-green-card { border-color: rgba(var(--primary-green-rgb), 0.3); }
+.career-card .card-back.bg-primary-yellow-card { border-color: rgba(var(--primary-yellow-rgb), 0.3); }
+/* Add more border colors if needed */
+
+.career-card:hover .card-front {
+    transform: rotateY(-180deg);
+}
+
+.career-card:hover .card-back {
+    transform: rotateY(0deg);
+}
+
+.cc-icon-wrapper {
+    width: 65px; /* Slightly larger icon circle */
+    height: 65px;
+    border-radius: 16px; /* Squircle shape */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for icon */
+    /* Background color set via bg-* classes */
+}
+/* Icon wrapper colors remain the same */
+.cc-icon-wrapper.bg-primary-green { background-color: var(--primary-green); }
+.cc-icon-wrapper.bg-primary-yellow { background-color: var(--primary-yellow); }
+.cc-icon-wrapper.bg-orange { background-color: var(--orange); }
+.cc-icon-wrapper.bg-purple { background-color: var(--purple); }
+/* ... other bg colors ... */
+
+.career-card h3 { /* Title mặt trước */
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.career-card h4 { /* Title chính mặt sau (Ai phù hợp?) */
+    font-size: 1.1rem; /* Giảm nhẹ */
+    font-weight: 700; /* Đậm hơn */
+    margin-top: 0; /* Bỏ margin top nếu dùng flex */
+    margin-bottom: 8px; /* Giảm margin bottom */
+    color: var(--text-dark);
+}
+.career-card h4 i {
+    vertical-align: middle; /* Căn icon với chữ */
+    opacity: 0.7;
+}
+
+
+h5.card-back-subtitle { /* Title phụ mặt sau (Kỹ năng) */
+    font-size: 0.95rem; /* Nhỏ hơn h4 */
+    font-weight: 600; /* Đậm vừa */
+    margin-top: 15px; /* **Khoảng cách với phần trên** */
+    margin-bottom: 5px;
+    color: var(--text-dark); /* Có thể đổi màu nhấn */
+}
+h5.card-back-subtitle i {
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+.career-card p { /* Mô tả chung */
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 0; /* Reset margin bottom mặc định */
+    max-width: 95%; /* Giới hạn chiều rộng text */
+}
+p.keywords { /* Keywords mặt trước */
+    font-style: normal;
+    color: var(--text-medium);
+    opacity: 1;
+    margin-bottom: 20px;
+}
+p.card-back-text { /* Text mô tả kỹ năng */
+    font-size: 0.85rem; /* Nhỏ hơn p thường */
+    margin-bottom: 15px; /* **Khoảng cách với phần dưới** */
+    color: #495057; /* Màu chữ hơi khác */
+}
+
+small.suggested-majors { /* Phần ngành gợi ý */
+    font-size: 0.8rem;
+    color: var(--text-medium);
+    margin-top: 15px; /* **Khoảng cách với phần trên (thay cho hr)** */
+    padding-top: 15px; /* **Thêm padding top** */
+    width: 90%; /* Giới hạn chiều rộng */
+    /* **Thêm đường kẻ trên thay thế hr** */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    line-height: 1.5; /* Tăng nhẹ line-height nếu text dài */
+}
+small.suggested-majors i {
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+.flip-hint { /* Gợi ý lật mặt trước */
+    /* Giữ nguyên style */
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary-green);
+    margin-top: auto; /* Đẩy xuống dưới cùng của flex */
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 50px;
+    background-color: var(--light-green-bg);
+}
+.career-card:hover .flip-hint {
+    opacity: 0;
+}
+
+.career-card .card-back small {
+    font-size: 0.8rem;
+    color: var(--text-medium);
+    margin-top: auto; /* Push to bottom */
+    padding-top: 10px; /* Space above */
+}
+
+
+
+/* Background color utility classes for card backs - Use new vars */
+.bg-primary-green-light { background-color: var(--bg-primary-green-card); }
+.bg-primary-yellow-light { background-color: var(--bg-primary-yellow-card); }
+.bg-info-light { background-color: var(--bg-info-card); }
+.bg-danger-light { background-color: var(--bg-danger-card); }
+.bg-orange-light { background-color: var(--bg-orange-card); border-color: rgba(253, 126, 20, 0.3); } 
+.bg-purple-light { background-color: var(--bg-purple-card); border-color: rgba(111, 66, 193, 0.3); } 
+/* Add bg-accent-blue-light if needed */
+
+/* --- Final CTA Section (Refined Framed) --- */
+.final-cta-section {
+    /* **Sử dụng lại nền xanh nhạt để tạo sự liên kết với các section khác** */
+    background-color: var(--light-green-bg, #f0f9f3);
+    padding-top: 80px;    /* Tăng padding section */
+    padding-bottom: 80px;
+}
+
+/* Xóa các shapes nền (vẫn giữ) */
+.final-cta-section::before,
+.final-cta-section::after {
+    display: none;
+}
+
+/* --- Styling tinh chỉnh cho khung/thẻ CTA --- */
+.cta-frame {
+    background-color: #fff; /* Nền trắng */
+    padding: 55px 50px;   /* Tăng padding bên trong khung */
+    border-radius: 20px; /* **Tăng độ bo tròn** */
+    /* **Shadow mềm mại hơn, hơi lan tỏa** */
+    box-shadow: 0 10px 40px rgba(40, 167, 69, 0.1);
+    border: none; /* **Bỏ border** */
+    max-width: 750px; /* Giảm nhẹ max-width */
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease; 
+}
+.final-cta-section:hover .cta-frame {
+    box-shadow: 0 15px 50px rgba(40, 167, 69, 0.15);
+} 
+
+
+/* **Dải màu nhấn ở trên, tinh tế hơn** */
+.cta-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%; /* **Không kéo dài hết chiều ngang** */
+    width: 80%; /* **Để lại khoảng trống hai bên** */
+    height: 5px; /* Giảm chiều cao */
+    /* **Gradient mượt hơn** */
+    background: linear-gradient(90deg, var(--primary-green) 0%, var(--primary-yellow) 100%);
+    border-radius: 0 0 5px 5px; /* Bo góc dưới của dải màu */
+}
+
+.final-cta-title {
+    font-size: clamp(1.8rem, 4vw, 2.3rem); /* Giữ kích thước */
+    font-weight: 800; /* **Tăng độ đậm title** */
+    color: var(--text-dark);
+    margin-bottom: 15px; /* **Thêm khoảng cách dưới title** */
+}
+
+.final-cta-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    max-width: 500px; /* Giới hạn thêm subtitle */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7; /* Đảm bảo line-height tốt */
+}
+
+/* --- Styling nút CTA --- */
+.final-cta-section .btn-primary {
+    padding: 15px 40px; /* Padding lớn hơn */
+    font-size: 1rem;
+    font-weight: 700; /* **Nút đậm hơn** */
+    border-radius: 50px; /* Bo tròn */
+    /* Kế thừa màu từ style.css */
+    /* **Thêm shadow cho nút** */
+    box-shadow: 0 5px 15px rgba(var(--primary-green-rgb), 0.2);
+    transition: all 0.3s ease;
+}
+.final-cta-section .btn-primary:hover,
+.final-cta-section .btn-primary:focus {
+     transform: translateY(-4px); /* Nhấc cao hơn khi hover */
+     box-shadow: 0 8px 20px rgba(var(--primary-green-rgb), 0.3); /* Shadow rõ hơn khi hover */
+  
+}
+
+
+/* --- Responsive Adjustments for Refined Framed CTA --- */
+@media (max-width: 991px) {
+    .final-cta-section { padding: 70px 0; }
+    .cta-frame { padding: 45px 40px; }
+}
+
+@media (max-width: 767px) {
+    .final-cta-section { padding: 50px 15px; } /* Thêm padding ngang cho section */
+    .cta-frame {
+        padding: 40px 20px; /* Giảm padding frame */
+        border-radius: 16px; /* Giảm bo góc */
+    }
+    .cta-frame::before {
+        left: 5%;
+        width: 90%;
+        height: 4px;
+    }
+    .final-cta-title { font-size: clamp(1.6rem, 5vw, 1.9rem); margin-bottom: 10px; }
+    .final-cta-subtitle { font-size: 1rem; }
+    .final-cta-section .btn-primary { padding: 12px 30px; font-size: 0.9rem; }
+}
+
+/* Pulse animation remains the same */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--primary-yellow-rgb), 0.5); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(var(--primary-yellow-rgb), 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(var(--primary-yellow-rgb), 0); }
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) {
+    .header-main-title { font-size: clamp(2.2rem, 5vw, 3.2rem); }
+    .header-lead-text { font-size: 1.1rem; }
+    .benefit-card, .process-card { margin-bottom: 25px; }
+    .section-padding { padding: 50px 0; }
+}
+
+@media (max-width: 767px) {
+    .quiz-intro-header { padding-top: 60px; padding-bottom: 60px; text-align: center; }
+    .header-main-title { font-size: clamp(2rem, 6vw, 2.8rem); }
+    .header-lead-text { font-size: 1rem; margin-left:auto; margin-right:auto;}
+    .quiz-intro-header .btn { margin-left: 0; margin-right: 0;} /* Stack buttons */
+    .shape { display: none; }
+    .benefit-title, .process-title { font-size: 1.1rem; }
+    .career-card { min-height: 250px; }
+    .final-cta-title { font-size: 1.6rem; }
+    .final-cta-subtitle { font-size: 1rem; }
+    .final-cta-section .btn-secondary { padding: 12px 30px; font-size: 0.9rem; }
+}

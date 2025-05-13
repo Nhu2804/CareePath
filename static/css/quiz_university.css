@@ -1,0 +1,535 @@
+/* --- Import Variables --- */
+:root {
+    /* Primary Colors */
+    --primary-green: #28a745; 
+    --primary-yellow: #ffc107; 
+    --dark-green: #1e7e34; 
+    --text-dark: #212529; 
+    --text-medium: #495057; 
+    --border-color: #dee2e6; 
+    --box-shadow-sm: 0 .125rem .25rem rgba(0,0,0,.075); 
+    --box-shadow-md: 0 .5rem 1rem rgba(0,0,0,.1); 
+    --border-radius-sm: 0.25rem; 
+    --border-radius-md: 0.5rem; 
+    --border-radius-lg: 0.8rem; 
+    --font-primary: 'Be Vietnam Pro', sans-serif; 
+    --font-secondary: 'Roboto', sans-serif; 
+    --light-green-bg: #e6f7eb;
+    --light-yellow-bg: #fff8e1;
+    --accent-blue: #50b1f2;
+    --accent-blue-light: #e1f3fe;
+    --bg-primary-green-card: #d1f4e0;
+    --bg-primary-yellow-card: #fff5cc;
+    --info: #0dcaf0;
+    --bg-info-card: #cff4fc;
+    --danger: #dc3545;
+    --orange: #fd7e14;
+    --purple: #6f42c1;
+    --bg-danger-card: #f8d7da;
+    --bg-orange-card: #ffe8cc;
+    --bg-purple-card: #e9dffc;
+    --box-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.06);
+    --box-shadow-lifted: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* --- General Styles --- */
+body {
+    background-color: #fdfdfd;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-primary);
+    color: var(--text-dark);
+}
+p, li, small {
+    font-family: var(--font-secondary);
+    color: var(--text-medium);
+    line-height: 1.7;
+}
+.section-title {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.section-title.mb-5 {
+    margin-bottom: 3rem !important;
+}
+.section-padding {
+    padding: 60px 0;
+}
+
+@media (min-width: 992px) {
+    .section-padding {
+        padding: 80px 0;
+    }
+}
+
+/* --- Quiz Intro Header --- */
+.quiz-intro-header {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--light-green-bg);
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.header-main-title {
+    font-size: clamp(2.6rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.25;
+}
+.header-main-title .highlight-yellow {
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.header-lead-text {
+    font-size: 1.15rem;
+    max-width: 650px;
+}
+
+.quiz-intro-header .container {
+    position: relative;
+    z-index: 2;
+}
+
+.quiz-intro-header .btn {
+    padding: 14px 35px;
+    font-size: 0.95rem;
+}
+
+.header-illustration {
+    max-width: 100%;
+    height: auto;
+    animation: gentleBob 5s ease-in-out infinite;
+}
+
+@keyframes gentleBob {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.shape {
+    position: absolute;
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    opacity: 0.15;
+    pointer-events: none;
+    filter: blur(10px);
+    z-index: 1;
+}
+
+.shape-1 {
+    width: 250px;
+    height: 250px;
+    background-color: var(--primary-green);
+    top: 5%;
+    right: 8%;
+    animation: floatWobble 10s ease-in-out infinite alternate;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    background-color: var(--primary-yellow);
+    bottom: 10%;
+    left: 12%;
+    animation: floatWobble 12s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatWobble {
+    0% { transform: translateY(0px) rotate(0deg); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    50% { transform: translateY(-25px) rotate(15deg); }
+    100% { transform: translateY(0px) rotate(-10deg); border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+}
+
+/* Các phần CSS khác giữ nguyên */
+
+/* --- Benefits Section --- */
+.benefits-section {
+    background-color: #fff;
+}
+
+.benefit-card {
+    background-color: #fff;
+    padding: 35px 25px;
+    border-radius: var(--border-radius-lg);
+    border: none;
+    box-shadow: var(--box-shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-top: 4px solid transparent;
+}
+
+.benefit-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--box-shadow-lifted);
+}
+
+.benefit-card:has([style*="#ffc107"]):hover { border-top-color: #ffc107; }
+.benefit-card:has([style*="#2e8b57"]):hover { border-top-color: #2e8b57; }
+.benefit-card:has([style*="#17a2b8"]):hover { border-top-color: #17a2b8; }
+.benefit-card:has([style*="#fd7e14"]):hover { border-top-color: #fd7e14; }
+
+.benefit-icon {
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1);
+}
+
+.benefit-title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 12px;
+}
+
+.benefit-card p {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+}
+
+/* --- Process Section --- */
+.process-section {
+    background-color: var(--light-green-bg);
+}
+
+.process-card {
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-soft);
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+.process-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--box-shadow-lifted);
+}
+
+.process-number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 55px;
+    height: 55px;
+    background-color: var(--primary-green);
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 55px;
+    text-align: center;
+    border-radius: 16px 0 12px 0;
+    z-index: 2;
+    transition: background-color 0.3s ease;
+}
+.process-card:hover .process-number {
+    background-color: var(--dark-green);
+}
+
+.process-icon {
+    font-size: 2rem;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: var(--light-green-bg);
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+}
+
+.process-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+    position: relative;
+    z-index: 1;
+}
+
+.process-card p {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    position: relative;
+    z-index: 1;
+}
+
+/* --- Career Section (Flip Cards) --- */
+.career-section {
+    background-color: #fff;
+}
+
+.career-card {
+    perspective: 1500px;
+    min-height: 300px;
+    position: relative;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    background-color: transparent;
+    box-shadow: none;
+    transition: transform 0.4s ease;
+}
+.career-card:hover {
+    transform: translateY(-8px);
+}
+
+.career-card .card-front,
+.career-card .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.9s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px 25px;
+    text-align: center;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--box-shadow-soft);
+}
+
+.career-card .card-front {
+    z-index: 2;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    transform: rotateY(0deg);
+}
+
+.career-card .card-back {
+    z-index: 1;
+    transform: rotateY(180deg);
+    color: var(--text-dark);
+    border: 1px solid transparent;
+}
+
+.career-card .card-back.bg-primary-green-card { border-color: rgba(40, 167, 69, 0.3); }
+.career-card .card-back.bg-primary-yellow-card { border-color: rgba(255, 193, 7, 0.3); }
+.career-card .card-back.bg-info-light { border-color: rgba(13, 202, 240, 0.3); }
+
+.career-card:hover .card-front {
+    transform: rotateY(-180deg);
+}
+
+.career-card:hover .card-back {
+    transform: rotateY(0deg);
+}
+
+.cc-icon-wrapper {
+    width: 65px;
+    height: 65px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 2rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cc-icon-wrapper.bg-primary-green { background-color: var(--primary-green); }
+.cc-icon-wrapper.bg-primary-yellow { background-color: var(--primary-yellow); }
+.cc-icon-wrapper.bg-info { background-color: var(--info); }
+
+.career-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.career-card h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+.career-card h4 i {
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+h5.card-back-subtitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+h5.card-back-subtitle i {
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+.career-card p {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 0;
+    max-width: 95%;
+}
+p.keywords {
+    font-style: normal;
+    color: var(--text-medium);
+    opacity: 1;
+    margin-bottom: 20px;
+}
+p.card-back-text {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    color: #495057;
+}
+
+small.suggested-majors {
+    font-size: 0.8rem;
+    color: var(--text-medium);
+    margin-top: 15px;
+    padding-top: 15px;
+    width: 90%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
+}
+small.suggested-majors i {
+    vertical-align: middle;
+    opacity: 0.7;
+}
+
+.flip-hint {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--primary-green);
+    margin-top: auto;
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 50px;
+    background-color: var(--light-green-bg);
+}
+.career-card:hover .flip-hint {
+    opacity: 0;
+}
+
+
+.career-card .card-back small {
+    font-size: 0.8rem;
+    color: var(--text-medium);
+    margin-top: auto; /* Push to bottom */
+    padding-top: 10px; /* Space above */
+}
+
+
+
+/* Background color utility classes for card backs - Use new vars */
+.bg-primary-green-light { background-color: var(--bg-primary-green-card); }
+.bg-primary-yellow-light { background-color: var(--bg-primary-yellow-card); }
+.bg-info-light { background-color: var(--bg-info-card); }
+
+
+/* --- Final CTA Section --- */
+.final-cta-section {
+    background-color: var(--light-green-bg);
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.cta-frame {
+    background-color: #fff;
+    padding: 55px 50px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(40, 167, 69, 0.1);
+    border: none;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.4s ease;
+}
+.final-cta-section:hover .cta-frame {
+    box-shadow: 0 15px 50px rgba(40, 167, 69, 0.15);
+}
+
+.cta-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-green) 0%, var(--primary-yellow) 100%);
+    border-radius: 0 0 5px 5px;
+}
+
+.final-cta-title {
+    font-size: clamp(1.8rem, 4vw, 2.3rem);
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+.final-cta-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+.final-cta-section .btn-primary {
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.2);
+    transition: all 0.3s ease;
+}
+.final-cta-section .btn-primary:hover,
+.final-cta-section .btn-primary:focus {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 991px) {
+    .header-main-title { font-size: clamp(1.8rem, 4vw, 2.5rem); }
+    .header-lead-text { font-size: 0.95rem; }
+    .benefit-card, .process-card { margin-bottom: 20px; }
+    .section-padding { padding: 50px 0; }
+    .final-cta-section { padding: 70px 0; }
+    .cta-frame { padding: 45px 40px; }
+}
+
+@media (max-width: 767px) {
+    .quiz-intro-header { padding-top: 40px; padding-bottom: 40px; text-align: center; }
+    .header-main-title { font-size: clamp(1.6rem, 5vw, 2.2rem); }
+    .header-lead-text { font-size: 0.9rem; margin-left: auto; margin-right: auto; }
+    .quiz-intro-header .btn { margin-left: 0; margin-right: 0; }
+    .shape { display: none; }
+    .benefit-title, .process-title { font-size: 1.1rem; }
+    .career-card { min-height: 250px; }
+    .final-cta-section { padding: 50px 15px; }
+    .cta-frame { padding: 40px 20px; border-radius: 16px; }
+    .cta-frame::before { left: 5%; width: 90%; height: 4px; }
+    .final-cta-title { font-size: clamp(1.6rem, 5vw, 1.9rem); margin-bottom: 10px; }
+    .final-cta-subtitle { font-size: 1rem; }
+}
