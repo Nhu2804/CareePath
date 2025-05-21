@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'main',
     'quiz_highschool',
     'quiz_university',
-    'quiz_workers'
+    'quiz_workers',
+    'users',    
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,10 +86,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'exe',
-        'USER': 'root',
-        'PASSWORD': '12345',
-        'HOST': '127.0.0.1',  
-        'PORT': '3306',
+        'USER': 'root', 
+        'PASSWORD': 'mysqlojt',
+        'HOST': 'localhost',  # or the hostname where your MySQL server is running
+        'PORT': '3306',      # or the port on which your MySQL server is listening
     }
 }
 
