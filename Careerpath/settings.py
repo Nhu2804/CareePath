@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'main',
     'quiz_highschool',
     'quiz_university',
-    'quiz_workers'
+    'quiz_workers',
+    'trend',
+    'premium',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,7 +85,7 @@ WSGI_APPLICATION = 'Careerpath.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'exe',
+        'NAME': 'exe201',
         'USER': 'root',
         'PASSWORD': '12345',
         'HOST': '127.0.0.1',  

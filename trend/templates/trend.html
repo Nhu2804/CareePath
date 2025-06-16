@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Xu hướng ngành nghề - CareerPath{% endblock %}
+
+{% block content %}
+<section class="section-padding bg-light">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">📈 Xu hướng thị trường</h2>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <canvas id="growthChart" height="300"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <canvas id="demandChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">🔥 Top ngành nghề nổi bật</h2>
+        <div class="row g-4">
+            {% for industry in industries %}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 text-center shadow-sm border-0 hover-shadow">
+                    <div class="card-body">
+                        <i class="{{ industry.icon }} fa-2x mb-3 text-primary"></i>
+                        <h5 class="card-title">{{ industry.name }}</h5>
+                        <p class="text-success fw-bold">{{ industry.job_count }} việc làm</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Chart.js CDN and Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const trendLabels = {{ trend_labels|safe }};
+const trendData = {{ trend_data|safe }};
+const industryLabels = {{ industry_labels|safe }};
+const industryData = {{ industry_data|safe }};
+
+const ctx1 = document.getElementById('growthChart').getContext('2d');
+const growthChart = new Chart(ctx1, {
+    type: 'line',
+    data: {
+        labels: trendLabels,
+        datasets: [{
+            label: 'Việc làm',
+            data: trendData,
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
+        },
+        plugins: {
+            legend: { 
+                display: true, 
+                labels: { color: '#333', font: { size: 14 } } 
+            },
+            title: { 
+                display: true, 
+                text: 'Tăng trưởng số lượng việc làm', 
+                font: { size: 16 } 
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                backgroundColor: '#333',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 10,
+                cornerRadius: 4
+            }
+        },
+        scales: { 
+            y: { 
+                beginAtZero: true 
+            }
+        }
+    }
+});
+
+const ctx2 = document.getElementById('demandChart').getContext('2d');
+const demandChart = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: industryLabels,
+        datasets: [{
+            label: 'Số lượng việc làm',
+            data: industryData,
+            backgroundColor: '#17a2b8'
+        }]
+    },
+    options: {
+        responsive: true,
+        animation: {
+            duration: 1500,
+            easing: 'easeOutQuart'
+        },
+        plugins: {
+            legend: { 
+                display: true, 
+                labels: { color: '#333', font: { size: 14 } } 
+            },
+            title: { 
+                display: true, 
+                text: 'Nhu cầu tuyển dụng theo ngành', 
+                font: { size: 16 } 
+            },
+            tooltip: {
+                mode: 'index',
+                intersect: false,
+                backgroundColor: '#333',
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 10,
+                cornerRadius: 4
+            }
+        },
+        scales: { 
+            y: { 
+                beginAtZero: true 
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
