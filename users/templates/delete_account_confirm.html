@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Xoá tài khoản{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="alert alert-danger">
+        <h4 class="alert-heading">Bạn chắc chắn muốn xoá tài khoản?</h4>
+        <p>Tất cả dữ liệu liên quan đến tài khoản của bạn sẽ bị xoá vĩnh viễn và không thể khôi phục.</p>
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Xác nhận xoá tài khoản</button>
+            <a href="{% url 'users:edit_profile' %}" class="btn btn-secondary ms-2">Hủy</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

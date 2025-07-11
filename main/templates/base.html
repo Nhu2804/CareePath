@@ -21,6 +21,12 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    {% if premium_notice %}
+    <div class="alert alert-warning text-center mb-0">
+        {{ premium_notice }}
+    </div>
+{% endif %}
+
     <header class="navbar-custom sticky-top"> <!-- Added sticky-top -->
         <div class="container d-flex justify-content-between align-items-center"> <!-- Use Bootstrap container -->
             <a href="/" class="logo-link">
@@ -53,12 +59,36 @@
             </nav>
 
             <div class="header-actions d-flex align-items-center">
-                 <a href="#" class="btn btn-primary btn-login">Đăng nhập</a>
-                 <!-- Add a mobile menu toggle button -->
-                 <button class="navbar-toggler d-lg-none ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-expanded="false" aria-label="Toggle navigation">
-                     <i class="fas fa-bars"></i>
-                 </button>
-            </div>
+
+                {% if request.user.is_authenticated %}
+                    <div class="dropdown">
+                        <a class="d-flex align-items-center text-decoration-none dropdown-toggle no-caret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="{{ request.user.avatar.url }}" class="rounded-circle me-2" width="36" height="36">
+
+                            <span>
+                                {{ request.user.first_name }} {{ request.user.last_name }}
+                                {% if request.user.is_premium and request.user.premium_expiry > now %}
+                                    <span class="badge bg-success ms-2">Premium đến {{ request.user.premium_expiry|date:"d/m/Y" }}</span>
+                                {% endif %}
+                            </span>
+
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="{% url 'users:profile' %}">
+                                    <i class="fas fa-user-circle fa-fw"></i> Trang cá nhân
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'users:logout' %}">
+                                    <i class="fas fa-sign-out-alt fa-fw"></i> Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href="{% url 'users:login' %}" class="btn btn-primary btn-login">Đăng nhập</a>
+                {% endif %}
         </div>
         <!-- Mobile Navigation Collapse -->
         <div class="collapse navbar-collapse d-lg-none" id="mobileNav">

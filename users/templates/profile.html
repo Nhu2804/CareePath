@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Trang cá nhân{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+<div class="profile-v4-wrapper">
+    <div class="profile-v4-container">
+        
+        <header class="profile-tabs">
+            <button class="tab-link active" data-tab="personal-info">
+                <i class="fas fa-user-circle"></i><span>Thông tin cá nhân</span>
+            </button>
+            <button class="tab-link" data-tab="test-results">
+                <i class="fas fa-poll-h"></i><span>Kết quả trắc nghiệm</span>
+            </button>
+        </header>
+
+        <main class="profile-v4-content">
+            
+            <div class="tab-content active" id="personal-info">
+                <div class="info-tab-layout">
+                    
+                    <aside class="info-tab-sidebar">
+                        <!-- ... (Phần avatar giữ nguyên) ... -->
+                        <div class="info-avatar-wrapper" id="avatar-wrapper">
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" alt="Ảnh đại diện" class="info-avatar" id="profile-avatar-img">
+                            {% else %}
+                                <div class="info-avatar-placeholder">
+                                    <span>{{ user.username|first|upper }}</span>
+                                </div>
+                            {% endif %}
+                            
+                            <form id="avatar-upload-form" style="display: none;">
+                                {% csrf_token %}
+                                <input type="file" id="avatar-input" name="avatar" accept="image/*">
+                            </form>
+                            <label for="avatar-input" class="info-avatar-upload-btn" title="Thay đổi ảnh đại diện">
+                                <i class="fas fa-camera"></i>
+                            </label>
+                            
+                            <div class="avatar-loader" id="avatar-loader"><div class="spinner"></div></div>
+                        </div>
+                    </aside>
+
+                    <!-- Cột phải của tab: Bảng thông tin chi tiết -->
+                    <div class="info-tab-details">
+                        
+                        <!-- =========== VIEW HIỂN THỊ THÔNG TIN (MẶC ĐỊNH) =========== -->
+                        <div id="display-info-view">
+                            <div class="info-header">
+                                <h3>Thông tin cơ bản</h3>
+                                <button id="edit-profile-btn" class="btn-edit-inline">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    <span>Chỉnh sửa</span>
+                                </button>
+                            </div>
+                            <table class="info-table">
+                                <tbody>
+                                    <tr>
+                                        <td class="label"><i class="fas fa-user"></i> Họ và tên</td>
+                                        <td class="value" id="display-fullname">{{ user.first_name }} {{ user.last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><i class="fas fa-user-tag"></i> Tên người dùng</td>
+                                        <td class="value">{{ user.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><i class="fas fa-at"></i> Email</td>
+                                        <td class="value" id="display-email">{{ user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="label"><i class="fas fa-calendar-alt"></i> Ngày tham gia</td>
+                                        <td class="value">{{ user.date_joined|date:"d/m/Y" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- =========== VIEW CHỈNH SỬA THÔNG TIN (MẶC ĐỊNH ẨN) =========== -->
+                        <div id="edit-info-view" style="display: none;">
+                             <div class="info-header">
+                                <h3>Chỉnh sửa thông tin</h3>
+                            </div>
+                            <form id="profile-edit-form">
+                                {% csrf_token %}
+                                <table class="info-table editable">
+                                    <tbody>
+                                        <tr>
+                                            <td class="label"><i class="fas fa-user"></i> Họ</td>
+                                            <td class="value">
+                                                <input type="text" name="last_name" class="form-control-inline" value="{{ user.last_name }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label"><i class="fas fa-user"></i> Tên</td>
+                                            <td class="value">
+                                                <input type="text" name="first_name" class="form-control-inline" value="{{ user.first_name }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label"><i class="fas fa-user-tag"></i> Tên người dùng</td>
+                                            <td class="value">
+                                                <input type="text" name="username" class="form-control-inline" value="{{ user.username }}" readonly disabled title="Không thể thay đổi tên người dùng">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label"><i class="fas fa-at"></i> Email</td>
+                                            <td class="value">
+                                                <input type="email" name="email" class="form-control-inline" value="{{ user.email }}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-actions">
+                                    <button type="button" id="cancel-edit-btn" class="btn btn-secondary">Hủy</button>
+                                    <button type="submit" id="save-profile-btn" class="btn btn-primary">Lưu thay đổi</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ... (Phần tab Kết quả trắc nghiệm giữ nguyên) ... -->
+            <div class="tab-content" id="test-results">
+                 <div class="results-placeholder">
+                    <i class="fas fa-file-alt"></i>
+                    <p>Chưa có kết quả trắc nghiệm nào.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const tabId = link.getAttribute('data-tab');
+            tabLinks.forEach(item => item.classList.remove('active'));
+            tabContents.forEach(item => item.classList.remove('active'));
+            link.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        });
+    });
+
+    const avatarInput = document.getElementById('avatar-input');
+    const avatarWrapper = document.getElementById('avatar-wrapper');
+    const avatarLoader = document.getElementById('avatar-loader');
+    const avatarImg = document.getElementById('profile-avatar-img');
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    if (avatarInput) {
+        avatarInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return; // Không làm gì nếu người dùng không chọn file
+            }
+
+            // Kiểm tra kích thước file (ví dụ: không quá 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Lỗi: Kích thước ảnh không được vượt quá 2MB.');
+                // Reset input để người dùng có thể chọn lại file khác
+                this.value = ''; 
+                return;
+            }
+            
+            // Chuẩn bị dữ liệu để gửi đi
+            const formData = new FormData();
+            formData.append('avatar', file);
+            
+            // Hiển thị loader
+            avatarLoader.style.display = 'flex';
+
+            // Gửi request AJAX
+            fetch("{% url 'users:ajax_update_avatar' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Cập nhật ảnh trên giao diện
+                    avatarImg.src = data.new_avatar_url;
+                    // Cập nhật ảnh trên header (nếu có)
+                    const headerAvatar = document.getElementById('header-user-avatar');
+                    if(headerAvatar) {
+                        headerAvatar.src = data.new_avatar_url;
+                    }
+                } else {
+                    // Thông báo lỗi
+                    alert('Lỗi: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Lỗi khi tải ảnh lên:', error);
+                alert('Đã có lỗi không mong muốn xảy ra. Vui lòng thử lại.');
+            })
+            .finally(() => {
+                // Ẩn loader dù thành công hay thất bại
+                avatarLoader.style.display = 'none';
+                // Reset input để có thể chọn lại cùng một file
+                this.value = ''; 
+            });
+        });
+    }
+
+
+    // Khai báo các element
+    const displayView = document.getElementById('display-info-view');
+    const editView = document.getElementById('edit-info-view');
+    const editBtn = document.getElementById('edit-profile-btn');
+    const cancelBtn = document.getElementById('cancel-edit-btn');
+    const profileEditForm = document.getElementById('profile-edit-form');
+
+    // Hàm chuyển sang chế độ chỉnh sửa
+    if (editBtn) {
+        editBtn.addEventListener('click', () => {
+            displayView.style.display = 'none';
+            editView.style.display = 'block';
+        });
+    }
+
+    // Hàm hủy chỉnh sửa
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', () => {
+            displayView.style.display = 'block';
+            editView.style.display = 'none';
+            // Optional: reset form về giá trị ban đầu nếu người dùng đã gõ gì đó
+            profileEditForm.reset(); 
+        });
+    }
+
+    // Hàm lưu thay đổi
+    if (profileEditForm) {
+        profileEditForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Ngăn form submit theo cách truyền thống
+
+            const formData = new FormData(this);
+            const saveButton = document.getElementById('save-profile-btn');
+            const originalButtonText = saveButton.innerHTML;
+            saveButton.disabled = true;
+            saveButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang lưu...';
+
+            fetch("{% url 'users:ajax_update_profile' %}", {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    // CSRF token đã được thêm vào form data nên không cần thêm vào header
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Cập nhật lại các trường hiển thị
+                    document.getElementById('display-fullname').textContent = data.first_name + ' ' + data.last_name;
+                    document.getElementById('display-email').textContent = data.email;
+
+                    // Cập nhật tên trên header (nếu có)
+                    const headerUsername = document.querySelector('.header-username');
+                    if (headerUsername) {
+                        headerUsername.textContent = data.first_name + ' ' + data.last_name;
+                    }
+
+                    // Chuyển về view hiển thị
+                    displayView.style.display = 'block';
+                    editView.style.display = 'none';
+                    alert('Cập nhật thông tin thành công!');
+                } else {
+                    alert('Lỗi: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Đã có lỗi xảy ra. Vui lòng thử lại.');
+            })
+            .finally(() => {
+                // Khôi phục lại nút Save
+                saveButton.disabled = false;
+                saveButton.innerHTML = originalButtonText;
+            });
+        });
+    }
+});
+
+</script>
+{% endblock %}

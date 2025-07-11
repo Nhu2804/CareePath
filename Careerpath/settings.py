@@ -45,17 +45,25 @@ INSTALLED_APPS = [
     'quiz_workers',
     'trend',
     'premium',
+    'users',
+    'social_django',
 ]
+
+
+AUTH_USER_MODEL = 'users.CustomUser'
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.locale.LocaleMiddleware', 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'premium.middleware.PremiumRequiredMiddleware',
+    'premium.middleware.CheckPremiumExpiryMiddleware'
 ]
 
 ROOT_URLCONF = 'Careerpath.urls'
@@ -63,14 +71,19 @@ ROOT_URLCONF = 'Careerpath.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'users' / 'templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'premium.context_processors.premium_status',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',          
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -85,13 +98,19 @@ WSGI_APPLICATION = 'Careerpath.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'exe201',
-        'USER': 'root',
+        'NAME': 'exe1',
+        'USER': 'root', 
         'PASSWORD': '12345',
         'HOST': '127.0.0.1',  
         'PORT': '3306',
     }
 }
+
+
+# Password validation
+# https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
+
 
 
 # Password validation
@@ -112,6 +131,37 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',  # thêm dòng này để bật đăng nhập Google
+    'django.contrib.auth.backends.ModelBackend',
+)
+import os
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
+ 
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+
+    'users.pipeline.associate_by_email', 
+    'users.pipeline.save_avatar_from_google', 
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'uyenntse170340@fpt.edu.vn'  
+EMAIL_HOST_PASSWORD = 'cood qsfk rlam qfdi'  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -120,8 +170,12 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+LANGUAGE_CODE = 'vi'
 
+TIME_ZONE = 'Asia/Ho_Chi_Minh'
+
+USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
 
@@ -138,3 +192,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_REDIRECT_URL = '/'          # sau đăng nhập google chuyển về trang chủ
+LOGOUT_REDIRECT_URL = '/'         # sau đăng xuất chuyển về trang chủ
+
+

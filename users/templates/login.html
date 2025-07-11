@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Đăng nhập - CareerPath</title>
+    <!-- Nhúng Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap&subset=vietnamese" rel="stylesheet">
+    <!-- Link CSS mới -->
+    <link rel="stylesheet" href="{% static 'css/user.css' %}">
+</head>
+<body class="page-login">
+    <div class="loading-overlay" id="full-page-loader">
+        <div class="spinner"></div>
+    </div>
+    <main class="login-wrapper">
+        <div class="login-container">
+            <!-- Cột Trái: Illustration -->
+            <div class="login-illustration-panel">
+                {# **Đảo ngược cấu trúc bên trong** #}
+                <div class="illustration-content">
+                     <img src="{% static 'images/login.png' %}" alt="Minh họa Đăng nhập" class="illustration-img"/>
+                     <h2 class="illustration-title">Chào mừng bạn đến với <span class="brand-text">CAREERPATH</span></h2>
+                     <p class="illustration-subtitle">Khám phá tiềm năng, định hướng tương lai và bứt phá sự nghiệp của bạn ngay hôm nay.</p>
+                </div>
+            </div>
+
+            <!-- Cột Phải: Form Đăng Nhập -->
+            <div class="login-form-panel">
+                <h1 class="form-title">Đăng nhập</h1>
+                
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                        <div class="form-errors">
+                            {% for error in form.non_field_errors %}
+                                <p class="error-item">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <!-- **Cấu trúc input mới** -->
+                    <div class="floating-input-group">
+                        {{ form.username }}
+                        <label for="{{ form.username.id_for_label }}">{{ form.username.label }} *</label>
+                        {% if form.username.errors %}
+                            <small class="error-text">{{ form.username.errors.as_text | striptags }}</small>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="floating-input-group password-group">
+                        {{ form.password }}
+                        <label for="{{ form.password.id_for_label }}">{{ form.password.label }} *</label>
+                        <button type="button" class="toggle-password" aria-label="Hiện/Ẩn mật khẩu">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        {% if form.password.errors %}
+                            <small class="error-text">{{ form.password.errors.as_text | striptags }}</small>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- **Cấu trúc action mới** -->
+                    <div class="form-actions">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="remember-me" name="remember-me">
+                            <label for="remember-me">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <a href="#" id="forgot-password-trigger" class="action-link">Quên mật khẩu?
+                    </div>
+
+                    <button type="submit" class="btn-submit">Đăng nhập</button>
+                </form>
+
+                <div class="or-divider"><span>Hoặc</span></div>
+
+                <a href="{% url 'social:begin' 'google-oauth2' %}?next=/" class="google-btn">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" width="22" height="22"/>
+                    <span>Tiếp tục với Google</span>
+                </a>
+                
+                <p class="switch-form-text">
+                    Chưa có tài khoản? <a href="{% url 'users:register' %}" class="switch-form-link">Đăng ký ngay</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 👇 THÊM HTML CỦA MODAL VÀO CUỐI BODY -->
+    <div class="modal-overlay" id="password-reset-modal">
+        <div class="modal-content">
+            
+            <!-- VIEW 1: FORM ĐIỀN EMAIL (Mặc định hiển thị) -->
+            <div id="reset-form-view">
+                <div class="modal-header">
+                    <h2 class="modal-title">Đặt lại mật khẩu</h2>
+                </div>
+                <p class="modal-description">
+                    Nhập địa chỉ email của tài khoản, chúng tôi sẽ gửi cho bạn liên kết để đặt lại mật khẩu.
+                </p>
+                
+                <form method="post" action="{% url 'users:ajax_password_reset' %}" class="modal-form" id="password-reset-form" novalidate>
+                    {% csrf_token %}
+                    <div class="floating-input-group">
+                        {{ password_reset_form.email }}
+                        <label for="{{ password_reset_form.email.id_for_label }}">Địa chỉ email *</label>
+                        <div id="reset-email-error" class="error-text"></div>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-cancel" id="cancel-reset-btn">Hủy bỏ</button>
+                        <button type="submit" class="btn btn-continue">Tiếp tục</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 👇 THÊM CONTAINER CHO TOAST VÀO ĐÂY -->
+    <div id="toast-container"></div>
+
+    <!-- **JAVASCRIPT CHO NÚT HIỆN/ẨN MẬT KHẨU** -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.getElementById('{{ form.password.id_for_label }}');
+
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function () {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    
+                    this.querySelector('i').classList.toggle('fa-eye');
+                    this.querySelector('i').classList.toggle('fa-eye-slash');
+                });
+            }
+
+            //THÊM JAVASCRIPT ĐỂ ĐIỀU KHIỂN MODAL
+
+            const modal = document.getElementById('password-reset-modal');
+            const triggerLink = document.getElementById('forgot-password-trigger');
+            const cancelButton = document.getElementById('cancel-reset-btn');
+            const resetForm = document.getElementById('password-reset-form');
+            const emailErrorDiv = document.getElementById('reset-email-error');
+            const toastContainer = document.getElementById('toast-container');
+
+            // --- HÀM TIỆN ÍCH ---
+            
+            // HÀM showToast ĐÃ ĐƯỢC NÂNG CẤP
+            function showToast(message, duration = 5000) {
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="#28A745"></path><path d="M9.5 11.5L11.5 13.5L14.5 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </div>
+                    <p class="toast-message">${message}</p>
+                    <button class="toast-close">×</button>
+                    <div class="toast-progress">
+                        <div class="toast-progress-bar"></div>
+                    </div>
+                `;
+                
+                toastContainer.appendChild(toast);
+
+                // Bắt đầu logic Pause/Resume
+                let autoCloseTimer;
+                let remainingTime = duration;
+                let startTime;
+                const progressBar = toast.querySelector('.toast-progress-bar');
+
+                const hideToast = () => {
+                    toast.classList.remove('show');
+                    toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+                };
+
+                const pauseTimer = () => {
+                    clearTimeout(autoCloseTimer);
+                    remainingTime -= (Date.now() - startTime);
+                    progressBar.style.animationPlayState = 'paused';
+                };
+
+                const resumeTimer = () => {
+                    startTime = Date.now();
+                    progressBar.style.animationPlayState = 'running';
+                    autoCloseTimer = setTimeout(hideToast, remainingTime);
+                };
+
+                toast.addEventListener('mouseenter', pauseTimer);
+                toast.addEventListener('mouseleave', resumeTimer);
+
+                toast.querySelector('.toast-close').addEventListener('click', () => {
+                    clearTimeout(autoCloseTimer);
+                    hideToast();
+                });
+                
+                // Timeout nhỏ để kích hoạt transition slide-in và bắt đầu timer
+                setTimeout(() => {
+                    toast.classList.add('show');
+                    resumeTimer(); // Bắt đầu timer lần đầu
+                }, 10);
+            }
+
+            // Hàm để đóng modal và reset form (giữ nguyên)
+            function closeModal() {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    resetForm.reset();
+                    emailErrorDiv.textContent = '';
+                }, 300);
+            }
+
+            // --- LOGIC XỬ LÝ SỰ KIỆN (giữ nguyên) ---
+
+            // Mở modal
+            triggerLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                modal.classList.add('active');
+            });
+
+            // Đóng modal
+            cancelButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            });
+
+
+            const pageLoader = document.getElementById('full-page-loader');
+            // Xử lý submit form bằng AJAX
+            resetForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(resetForm);
+                emailErrorDiv.textContent = ''; 
+
+                pageLoader.classList.add('active');
+
+                fetch(resetForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': formData.get('csrfmiddlewaretoken'),
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                })
+                .then(response => {
+                    // Delay một chút để người dùng thấy được spinner, tạo cảm giác xử lý thật
+                    return new Promise(resolve => setTimeout(() => resolve(response), 500)); 
+                })
+                .then(response => {
+                    if (response.ok) return response.json();
+                    return response.json().then(err => Promise.reject(err));
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        closeModal();
+                        showToast(data.message || 'Vui lòng kiểm tra email để đặt lại mật khẩu');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    if (error.status === 'error' && error.errors) {
+                        const emailErrors = JSON.parse(error.errors).email;
+                        if (emailErrors && emailErrors.length > 0) {
+                            emailErrorDiv.textContent = emailErrors[0].message;
+                        }
+                    } else {
+                        emailErrorDiv.textContent = 'Có lỗi xảy ra, vui lòng thử lại.';
+                    }
+                })
+                .finally(() => {
+                    // --- DỪNG LOADING DÙ THÀNH CÔNG HAY THẤT BẠI ---
+                    pageLoader.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

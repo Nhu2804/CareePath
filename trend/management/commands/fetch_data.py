@@ -1,23 +1,23 @@
-import requests
+# fetch_data.py (FULL CODE FIXED)
+
 from django.core.management.base import BaseCommand
 from trend.models import TopIndustry, IndustryTrend
-from datetime import datetime
-import time
-from random import uniform
 from django.utils.timezone import now
+from random import uniform
+import requests
+import time
 
 class Command(BaseCommand):
     help = 'Fetch job market data from Adzuna API with pagination and update DB'
 
     def handle(self, *args, **kwargs):
-        app_id = '160494d1'  # Thay bằng app_id của bạn
-        app_key = '2eda2224bd01a8ea513c42037d15ef98'  # Thay bằng app_key của bạn
-        country_code = 'gb'  # Quốc gia
-
+        app_id = '160494d1'  # Replace with your Adzuna app_id
+        app_key = '2eda2224bd01a8ea513c42037d15ef98'  # Replace with your Adzuna app_key
+        country_code = 'gb'
         base_url = f'https://api.adzuna.com/v1/api/jobs/{country_code}/search/'
 
         industry_counts = {}
-        total_pages = 20  # Số trang dữ liệu lấy
+        total_pages = 2  # For testing; adjust to 20+ when stable
 
         for page in range(1, total_pages + 1):
             url = base_url + str(page)
@@ -28,12 +28,9 @@ class Command(BaseCommand):
                 'content-type': 'application/json',
             }
             response = requests.get(url, params=params)
-
             if response.status_code != 200:
-                self.stdout.write(self.style.ERROR(f"Failed to fetch page {page}, status code: {response.status_code}"))
-                self.stdout.write(self.style.ERROR(f"Response: {response.text}"))
+                self.stdout.write(self.style.ERROR(f"Failed to fetch page {page}, status: {response.status_code}"))
                 break
-
             data = response.json()
             jobs = data.get('results', [])
 
@@ -41,9 +38,8 @@ class Command(BaseCommand):
                 category = job.get('category', {}).get('label', 'Unknown')
                 industry_counts[category] = industry_counts.get(category, 0) + 1
 
-            time.sleep(1)  # tránh spam API quá nhanh
+            time.sleep(1)
 
-        # Icon mapping
         ICON_MAPPING = {
             'Teaching Jobs': 'fa-solid fa-chalkboard-teacher',
             'Engineering Jobs': 'fa-solid fa-cogs',
@@ -55,7 +51,6 @@ class Command(BaseCommand):
             'Sales Jobs': 'fa-solid fa-chart-line',
         }
 
-        # Update TopIndustry
         for name, count in sorted(industry_counts.items(), key=lambda x: x[1], reverse=True)[:8]:
             icon_class = ICON_MAPPING.get(name, 'fa-solid fa-briefcase')
             TopIndustry.objects.update_or_create(
@@ -64,30 +59,25 @@ class Command(BaseCommand):
             )
 
         today = now().date()
-
-        # Kiểm tra xem đã có dữ liệu ngày hôm nay chưa
-        if IndustryTrend.objects.filter(updated_at__date=today).exists():
-            self.stdout.write(self.style.WARNING(f"Data for {today} already exists. Skipping creation."))
-        else:
-            # Tạo 1 điểm dữ liệu mới cho ngày hôm nay
+        
+        if not IndustryTrend.objects.filter(updated_at__date=today).exists():
             IndustryTrend.objects.create(
                 name=f"Trend ngày {today.strftime('%d/%m/%Y')}",
-                description="Mô tả ví dụ",
+                description="Mô tả tự động từ fetch_data",
                 trend_score=round(uniform(0.3, 1.0), 2),
                 job_growth=f"Tăng {round(uniform(5, 20), 2)}%/năm",
-                updated_at=now()
+                record_date=today
             )
-            self.stdout.write(self.style.SUCCESS(f"Created new trend data for {today}"))
 
-        # Giữ lại tối đa 6 ngày dữ liệu gần nhất
-        unique_dates = IndustryTrend.objects.values('updated_at__date').distinct().order_by('-updated_at__date')[:6]
-        dates_to_keep = [d['updated_at__date'] for d in unique_dates]
+            self.stdout.write(self.style.SUCCESS(f"✅ Created new trend data for {today}"))
+        else:
+            self.stdout.write(self.style.WARNING(f"⚠️ Data for {today} already exists. Skipping creation."))
 
-        # Xóa các bản ghi có ngày không nằm trong 6 ngày gần nhất
-        IndustryTrend.objects.exclude(updated_at__date__in=dates_to_keep).delete()
+        # Clean up old data (keep max 6 days)
+        unique_dates = IndustryTrend.objects.values_list('record_date', flat=True).distinct().order_by('-record_date')[:6]
+        dates_to_keep = list(unique_dates)
+        deleted_count, _ = IndustryTrend.objects.exclude(record_date__in=dates_to_keep).delete()
 
-        self.stdout.write(self.style.SUCCESS('Successfully updated top industries and trends'))
-
-        remaining = response.headers.get('X-RateLimit-Remaining')
-        if remaining:
-            self.stdout.write(self.style.SUCCESS(f"API requests remaining: {remaining}"))
+        
+        self.stdout.write(self.style.SUCCESS(f"🧹 Cleaned {deleted_count} old records, kept {len(dates_to_keep)} recent days."))
+        self.stdout.write(self.style.SUCCESS('✅ Successfully updated top industries and trends.'))

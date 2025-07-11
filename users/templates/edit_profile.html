@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+    <h2>Chỉnh sửa thông tin cá nhân</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <a href="{% url 'users:profile' %}" class="btn btn-secondary">Hủy</a>
+    </form>
+    <a href="{% url 'users:delete_account' %}" class="btn btn-outline-danger mt-3">
+        <i class="fas fa-user-slash me-2"></i>Xoá tài khoản
+    </a>
+
+</div>
+{% endblock %}
